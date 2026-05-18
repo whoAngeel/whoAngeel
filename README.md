@@ -1,10 +1,7 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=500&color=58A6FF&center=true&vCenter=true&width=600&lines=Hola,+soy+%C3%81ngel+%F0%9F%91%8B;Full+Stack+Developer;Apasionado+por+los+hackathones" alt="Typing SVG" />
+  <h1>Ángel Jesús Zorrilla Cuevas</h1>
+  <h3>Full Stack Developer</h3>
 </div>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=whoAngeel&style=for-the-badge&color=58A6FF" alt="Profile Views" />
-</p>
 
 ---
 
@@ -22,13 +19,12 @@ Tecnologías con las que trabajo:
 
 ---
 
-## Estadísticas de GitHub
+## Estadísticas
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=whoAngeel&show_icons=true&theme=transparent&hide_border=true&include_all_commits=true" />
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=whoAngeel&layout=compact&theme=transparent&hide_border=true" />
-  <br/>
-  <img src="https://streak-stats.demolab.com/?user=whoAngeel&theme=transparent&hide_border=true" />
+  <a href="https://git.io/awesome-stats-card">
+    <img src="https://awesome-github-stats.azurewebsites.net/user-stats/whoAngeel?theme=tokyonight&cardType=level-alternate" />
+  </a>
 </div>
 
 ---
@@ -91,7 +87,6 @@ Sistema de Entradas del Centro de Información hecho con Flutter y almacenamient
 ### Backend & Cloud
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
