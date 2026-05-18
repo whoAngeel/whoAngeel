@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=500&color=58A6FF&center=true&vCenter=true&width=600&lines=Hola,+soy+%C3%81ngel+%F0%9F%91%8B;Full+Stack+Developer;Apasionado+por+la+tecnolog%C3%ADa+y+el+espacio" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=500&color=58A6FF&center=true&vCenter=true&width=600&lines=Hola,+soy+%C3%81ngel+%F0%9F%91%8B;Full+Stack+Developer;Apasionado+por+los+hackathones" alt="Typing SVG" />
 </div>
 
 <p align="center">
@@ -10,120 +10,109 @@
 
 ## Sobre mí
 
-Soy desarrollador **Full Stack** con experiencia en JavaScript, Python, React, Vue y Node.js. Me apasiona construir aplicaciones web modernas, explorar la nube con AWS y crear soluciones creativas. También soy un entusiasta del espacio y los exoplanetas 🌌.
+Soy desarrollador **Full Stack** con experiencia en Go, JavaScript/TypeScript, Python y Dart. Me apasiona construir herramientas útiles, aprender nuevas tecnologías y participar en hackathones.
 
-- 🔭 Actualmente trabajando en **proyectos con Vue.js y React**
-- 🌱 Aprendiendo sobre **arquitecturas serverless y cloud computing**
-- 💡 Me encanta participar en **hackathones** y crear proyectos open source
-- 🚀 Fanático de la **NASA** y la exploración espacial
+He ganado **1er lugar nacional en el Interledger Hackathon 2025**, y también un **primer lugar local con FundUp** que nos clasificó al nacional. También he participado en hackathones de ITIZ y de exoplanetas con la NASA.
+
+Trabajo con **Go** para CLIs y APIs, **Flutter** para apps de escritorio, **React / Vue** para frontends web, **Python** para ML, y **AWS** para despliegues serverless.
 
 ---
 
 ## Estadísticas de GitHub
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=whoAngeel&show_icons=true&theme=github_dark&hide_border=true&bg_color=0D1117&include_all_commits=true" />
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=whoAngeel&layout=compact&theme=github_dark&hide_border=true&bg_color=0D1117" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=whoAngeel&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=whoAngeel&layout=compact&theme=github_dark&hide_border=true" />
   <br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=whoAngeel&theme=github-dark-blue&hide_border=true&background=0D1117" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=whoAngeel&theme=github-dark-blue&hide_border=true" />
 </div>
 
 ---
 
-## Proyectos Destacados
+## Proyectos
 
-<table>
-  <tr>
-    <td width="50%">
-      <h3 align="center">🌍 Exoplanet Client</h3>
-      <p align="center">
-        <a href="https://github.com/whoAngeel/exoplanet-client" target="_blank">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=whoAngeel&repo=exoplanet-client&theme=github_dark&hide_border=true&bg_color=0D1117" />
-        </a>
-        <br/>
-        Visualización 3D de exoplanetas con datos de la NASA, React y AWS
-      </p>
-    </td>
-    <td width="50%">
-      <h3 align="center">✅ Todo Fullstack</h3>
-      <p align="center">
-        <a href="https://github.com/whoAngeel/todo-fullstack" target="_blank">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=whoAngeel&repo=todo-fullstack&theme=github_dark&hide_border=true&bg_color=0D1117" />
-        </a>
-        <br/>
-        Gestión de tareas con autenticación JWT, Node.js, Express, MongoDB y React
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3 align="center">☁️ AWS Backend API</h3>
-      <p align="center">
-        <a href="https://github.com/whoAngeel/backend-api-aws-demo" target="_blank">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=whoAngeel&repo=backend-api-aws-demo&theme=github_dark&hide_border=true&bg_color=0D1117" />
-        </a>
-        <br/>
-        Funciones Lambda en Python con API Gateway
-      </p>
-    </td>
-    <td width="50%">
-      <h3 align="center">📱 React Native Base</h3>
-      <p align="center">
-        <a href="https://github.com/whoAngeel/ReactNativeAppBase" target="_blank">
-          <img src="https://github-readme-stats.vercel.app/api/pin/?username=whoAngeel&repo=ReactNativeAppBase&theme=github_dark&hide_border=true&bg_color=0D1117" />
-        </a>
-        <br/>
-        Template de React Native con React Navigation
-      </p>
-    </td>
-  </tr>
-</table>
+### 🥇 [interledger-hackathon-2025](https://github.com/whoAngeel/interledger-hackathon-2025)
+**1er lugar nacional** — Proyecto construido con el protocolo Interledger.
+
+`JavaScript` `Interledger` `Hackathon`
+
+### 🏆 [fundup-backend](https://github.com/whoAngeel/fundup-backend)
+**Ganador local** que nos clasificó al nacional de Interledger Hackathon 2025. Plataforma de financiamiento colectivo.
+
+`TypeScript` `Backend` `Hackathon`
+
+### 🛩️ [flight-monitor-backend](https://github.com/whoAngeel/flight-monitor-backend)
+Backend del hackathon de **ITIZ** con integración de datos de vuelos en tiempo real vía OpenSky.
+
+`JavaScript` `OpenSky` `Hackathon`
+
+### 🌌 [exoplanets-with-ai](https://github.com/whoAngeel/exoplanets-with-ai)
+Hackathon — "A World Away: Hunting for Exoplanets with AI". ML aplicado a datos astronómicos de la NASA.
+
+`Python` `ML` `NASA` `Hackathon`
+
+### ⚙️ [n8n-exporter](https://github.com/whoAngeel/n8n-exporter)
+CLI exportador de workflows de n8n escrito en Go usando el framework Charm.
+
+`Go` `CLI` `n8n` `Charm`
+
+### 📦 [wms-lite](https://github.com/whoAngeel/wms-lite)
+Sistema de gestión de inventario (WMS) backend en Go. API REST para manejo de almacenes y productos.
+
+`Go` `REST API` `Backend`
+
+### 📋 [seci-desktop-offline](https://github.com/whoAngeel/seci-desktop-offline)
+Sistema de Entradas del Centro de Información hecho con Flutter y almacenamiento local.
+
+`Dart` `Flutter` `Desktop`
 
 ---
 
 ## Tech Stack
 
 ### Lenguajes
+![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=for-the-badge&logo=go&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
-### Frameworks & Librerías
+### Frontend
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-### Herramientas & Plataformas
+### Backend & Cloud
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
-![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
-![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=for-the-badge&logo=apache&logoColor=white)
-![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+### Herramientas
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
 ---
 
 ## Code::Stats
 
-![My Code::Stats history graph](https://codestats-readme.wegfan.cn/history-graph/whoAngeel?bg_color=0D1117)
+![Code::Stats history graph](https://codestats-readme.wegfan.cn/history-graph/whoAngeel?bg_color=22272e)
 
 ---
 
 ## Conéctate conmigo
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-8109a626b/" target="_blank">
+  <a href="https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-8109a626b/">
     <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
-  <a href="https://github.com/whoAngeel" target="_blank">
+  <a href="https://github.com/whoAngeel">
     <img src="https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
   </a>
 </p>
@@ -131,5 +120,5 @@ Soy desarrollador **Full Stack** con experiencia en JavaScript, Python, React, V
 ---
 
 <div align="center">
-  ⚡ <em>"La imaginación es más importante que el conocimiento" — Albert Einstein</em>
+  <sub>La imaginación es más importante que el conocimiento — Albert Einstein</sub>
 </div>
