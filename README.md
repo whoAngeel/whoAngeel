@@ -10,21 +10,25 @@
 
 ## Sobre mí
 
-Soy desarrollador **Full Stack** con experiencia en Go, JavaScript/TypeScript, Python y Dart. Me apasiona construir herramientas útiles, aprender nuevas tecnologías y participar en hackathones.
+Desarrollador con experiencia en **Go** y **Python** para desarrollo de APIs, y **JavaScript/TypeScript** para frontend.
 
-He ganado **1er lugar nacional en el Interledger Hackathon 2025**, y también un **primer lugar local con FundUp** que nos clasificó al nacional. También he participado en hackathones de ITIZ y de exoplanetas con la NASA.
+He participado en varios hackathones obteniendo reconocimientos a nivel local y nacional, lo que refleja mi capacidad para resolver problemas complejos con un pensamiento orientado a soluciones prácticas.
 
-Trabajo con **Go** para CLIs y APIs, **Flutter** para apps de escritorio, **React / Vue** para frontends web, **Python** para ML, y **AWS** para despliegues serverless.
+Tecnologías con las que trabajo:
+- **Go / Python** — APIs y servicios backend
+- **n8n** — Automatización de workflows
+- **React / Vue.js** — Frontends web
+- **Flutter** — Aplicaciones de escritorio
 
 ---
 
 ## Estadísticas de GitHub
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=whoAngeel&show_icons=true&theme=github_dark&hide_border=true&include_all_commits=true" />
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=whoAngeel&layout=compact&theme=github_dark&hide_border=true" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=whoAngeel&show_icons=true&theme=transparent&hide_border=true&include_all_commits=true" />
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=whoAngeel&layout=compact&theme=transparent&hide_border=true" />
   <br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=whoAngeel&theme=github-dark-blue&hide_border=true" />
+  <img src="https://streak-stats.demolab.com/?user=whoAngeel&theme=transparent&hide_border=true" />
 </div>
 
 ---
@@ -87,7 +91,7 @@ Sistema de Entradas del Centro de Información hecho con Flutter y almacenamient
 ### Backend & Cloud
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
