@@ -1,0 +1,16 @@
+---
+import BaseAstro from "../components/BaseAstro.astro";
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <BaseAstro title="Angel ZC" description="Personal Portfolio"/>
+    </head>
+    <body>
+		<Header />
+        <slot />
+    </body>
+</html>

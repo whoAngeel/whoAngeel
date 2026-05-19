@@ -7,7 +7,7 @@
 
 ## Sobre mí
 
-Desarrollador con experiencia en **Go** y **Python** para desarrollo de APIs, y **JavaScript/TypeScript** para frontend.
+Desarrollador con experiencia en **Go** y **Python** para desarrollo de APIs, y **JavaScript/TypeScript** para frontend.bun 
 
 He participado en varios hackathones obteniendo reconocimientos a nivel local y nacional, lo que refleja mi capacidad para resolver problemas complejos con un pensamiento orientado a soluciones prácticas.
 

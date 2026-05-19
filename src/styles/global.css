@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: dark;
+  --charm-bg: #09090d;
+  --charm-surface: #111214;
+  --charm-surface-strong: #16161d;
+  --charm-border: #27272e;
+  --charm-border-soft: #34343c;
+  --charm-text: #e6e9ef;
+  --charm-muted: #94a3b8;
+  --charm-muted-soft: #6b7280;
+  --charm-accent: #7c3aed;
+  --charm-accent-strong: #6d28d9;
+  --charm-accent-soft: #9d79f3;
+  --charm-success: #22c55e;
+  --charm-warning: #f59e0b;
+  --charm-danger: #ef4444;
+  --charm-info: #38bdf8;
+  --charm-surface-transparent: rgba(255, 255, 255, 0.04);
+}
+
+html {
+  min-height: 100%;
+  background:
+    linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.06) 1px,
+        transparent 1px
+      ) 0 0 / 10px 20px,
+    linear-gradient(
+        to bottom,
+        rgba(148, 163, 184, 0.06) 1px,
+        transparent 1px
+      ) 0 0 / 10px 20px,
+    #0c0c14;
+  color: var(--charm-text);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--charm-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.07) 3px,
+      rgba(0, 0, 0, 0.07) 4px
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 55%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(124, 58, 237, 0.35);
+}
+
+a {
+  color: var(--charm-accent);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Palette utilities */
+.bg-charm-bg {
+  background-color: var(--charm-bg);
+}
+.bg-charm-surface {
+  background-color: var(--charm-surface);
+}
+.bg-charm-surface-strong {
+  background-color: var(--charm-surface-strong);
+}
+.text-charm-text {
+  color: var(--charm-text);
+}
+.text-charm-muted {
+  color: var(--charm-muted);
+}
+.text-charm-accent {
+  color: var(--charm-accent);
+}
+.border-charm-border {
+  border-color: var(--charm-border);
+}
+.border-charm-border-soft {
+  border-color: var(--charm-border-soft);
+}
+.ring-charm-accent {
+  box-shadow: 0 0 0 1px var(--charm-accent);
+}
