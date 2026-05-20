@@ -2,14 +2,137 @@
 
 ---
 
-<header class="flex justify-between items-center py-2 px-8 w-full shadow">
-    <nav class="flex flex-row gap-x-10 opacity-80">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/experience">Experiencie</a>
-        <a href="/projects">Projects</a>
-        <a href="/contact">Contact</a>
+<header class="sticky top-0 z-50 flex items-center justify-between py-3 px-8 w-full border-b border-charm-border bg-charm-bg" id="header">
+  <div class="flex items-center gap-10">
+    <a href="#" class="brand-link text-charm-text no-underline select-none">
+      whoAngeel<span class="cursor">_</span>
+    </a>
+    <nav class="flex items-center gap-x-10">
+      <a href="#experiencia" class="nav-link">Experiencia</a>
+      <a href="#proyectos" class="nav-link">Proyectos</a>
+      <a href="#habilidades" class="nav-link">Habilidades</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
     </nav>
-    <button class="p-1 bg-charm-accent">Download CV</button>
-
+  </div>
+  <button class="cta-btn bg-charm-accent text-charm-text font-medium text-sm px-4 py-1.5 rounded">Descargar CV</button>
 </header>
+
+<style is:global>
+  .brand-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .brand-link:hover {
+    color: var(--charm-accent-soft);
+  }
+
+  .cursor {
+    display: inline-block;
+    margin-left: 1px;
+    color: var(--charm-accent);
+    font-weight: 300;
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .nav-link.active {
+    color: var(--charm-text);
+  }
+
+  .cta-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: background 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.08) 55%,
+      transparent 75%
+    );
+    translate: -100%;
+    transition: translate 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cta-btn:hover::before {
+    translate: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+      opacity: 1;
+    }
+    .cta-btn::before {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+
+  if (!isReduced) {
+    const links = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = links
+      .map((l) => document.querySelector(l.getAttribute("href")))
+      .filter(Boolean);
+
+    function setActive(href) {
+      links.forEach((l) =>
+        l.classList.toggle("active", l.getAttribute("href") === href),
+      );
+    }
+
+    const header = document.getElementById("header");
+    if (header) {
+      ScrollTrigger.create({
+        start: "top -1px",
+        onUpdate: (self) => {
+          header.style.borderColor =
+            self.progress > 0
+              ? "var(--charm-border-soft)"
+              : "var(--charm-border)";
+        },
+      });
+    }
+
+    sections.forEach((section, i) => {
+      if (!section) return;
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 30%",
+        end: "bottom 30%",
+        onEnter: () => setActive(links[i]?.getAttribute("href")),
+        onEnterBack: () => setActive(links[i]?.getAttribute("href")),
+      });
+    });
+  }
+</script>

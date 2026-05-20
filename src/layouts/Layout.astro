@@ -2,12 +2,19 @@
 import BaseAstro from "../components/BaseAstro.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zorrilla Cuevas" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
     <head>
-        <BaseAstro title="Angel ZC" description="Personal Portfolio"/>
+        <BaseAstro title={title} description={description}/>
     </head>
     <body>
 		<Header />

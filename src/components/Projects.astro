@@ -1,0 +1,179 @@
+
+---
+const projects = [
+  {
+    name: "Crowdfunding para Desastres Naturales",
+    image: undefined,
+    badges: ["Blockchain", "Web3", "Python"],
+    winner: "🏆 GANADOR — Interledger Foundation",
+    detail: "Hackathon local → nacional/internacional con todo pagado. Ganamos porque resolvíamos problemas reales, no solo implementábamos la tecnología que la fundación quería."
+  },
+  {
+    name: "Exoplanets with AI",
+    image: undefined,
+    badges: ["Python", "Machine Learning", "NASA"],
+    winner: "🌍 TOP GLOBAL — NASA Space Apps",
+    detail: "Clasificación de exoplanetas con inteligencia artificial. Entró en los tops globales del hackathon de la NASA.",
+    code: "https://github.com/whoAngeel/exoplanets-with-ai"
+  },
+  {
+    name: "Monitoreo de Vuelos CDMX",
+    image: undefined,
+    badges: ["Python", "Visualización", "API"],
+    winner: "🏆 GANADOR — Hackathon Local",
+    detail: "Sistema de monitoreo de vuelos en el área de la CDMX. Ganamos entre varios equipos."
+  },
+  {
+    name: "Blockchain para Impacto Social",
+    image: undefined,
+    badges: ["Blockchain", "Solidity", "Web3"],
+    winner: "🏆 GANADOR — Múltiples Hackathones",
+    detail: "Soluciones con blockchain que ganaron en varios hackathones."
+  },
+  {
+    name: "Control de Agua Comunitaria",
+    image: undefined,
+    badges: ["Python", "Web"],
+    winner: "🏆 GANADOR — La Salle",
+    detail: "Sistema para llevar control de los problemas de agua en una comunidad."
+  },
+  {
+    name: "RAGO",
+    image: undefined,
+    badges: ["Go", "React", "PostgreSQL", "Qdrant"],
+    detail: "Proyecto fullstack para RAG. Backend en Go, base de datos PostgreSQL y vectorial en Qdrant, frontend en React.",
+    code: "https://github.com/whoAngeel/rago"
+  },
+  {
+    name: "n8n-exporter",
+    image: undefined,
+    badges: ["Go", "Charm CLI", "TUI"],
+    detail: "Tool para exportar workflows de n8n. Hecha en Go con Charm para interfaz TUI moderna. Línea de comandos.",
+    code: "https://github.com/whoAngeel/n8n-exporter"
+  },
+  {
+    name: "SECI",
+    image: undefined,
+    badges: ["Python", "Web", "Base de Datos"],
+    detail: "Sistema de Entradas para el Centro de Información. Contabilizaba las entradas a la biblioteca universitaria categorizando por carrera. Antes lo hacían manualmente con Excel."
+  }
+];
+---
+
+<section id="proyectos" class="max-w-5xl mx-auto w-full px-8 py-24">
+  <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Proyectos</h2>
+
+  <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+    {
+      projects.map((p, i) => (
+        <article
+          class="project-card bg-charm-surface border border-charm-border border-t-2 border-t-charm-accent/10 rounded overflow-hidden group cursor-default"
+          data-index={i}
+        >
+          <div class="project-img h-36 md:h-40 bg-charm-surface-strong border-b border-charm-border flex items-center justify-center text-charm-muted-soft text-xs select-none overflow-hidden relative">
+            {p.image
+              ? <img src={p.image} alt={p.name} class="w-full h-full object-cover" />
+              : <span class="font-mono tracking-wide opacity-25 text-charm-muted-soft">[ {p.name.split(" ")[0].toLowerCase()} ]</span>
+            }
+            {p.winner && (
+              <span class="absolute top-2 right-2 bg-charm-accent text-charm-text text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider uppercase max-w-[calc(100%-1rem)] truncate">{p.winner.split("—")[0].trim()}</span>
+            )}
+          </div>
+
+          <div class="px-5 py-4">
+            <h3 class="text-lg md:text-xl font-semibold text-charm-text">{p.name}</h3>
+
+            <div class="flex flex-wrap gap-1.5 mt-2">
+              {p.badges.map(badge => (
+                <span class="project-badge bg-charm-surface-strong border border-charm-border/60 px-2 py-0.5 text-xs text-charm-muted rounded">{badge}</span>
+              ))}
+            </div>
+
+            <div class="project-details overflow-hidden mt-0" style="max-height: 0; opacity: 0;">
+              {p.winner && (
+                <p class="text-charm-accent text-xs tracking-wide font-semibold mt-3 leading-relaxed">{p.winner}</p>
+              )}
+              <p class="text-sm text-charm-muted mt-2 leading-relaxed">{p.detail}</p>
+              {p.code && (
+                <div class="flex gap-3 mt-3">
+                  <a href={p.code} class="text-sm text-charm-accent hover:text-charm-accent-strong font-medium transition-colors">Codigo →</a>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll(".project-card");
+  const isTouch = window.matchMedia("(hover: none)").matches;
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  import gsap from "gsap";
+
+  if (isTouch || isReduced) {
+    cards.forEach((card) => {
+      const details = card.querySelector(".project-details");
+      if (details) {
+        details.style.maxHeight = "none";
+        details.style.opacity = "1";
+        details.style.overflow = "visible";
+      }
+    });
+  } else {
+      cards.forEach((card) => {
+        const details = card.querySelector(".project-details");
+        const img = card.querySelector(".project-img");
+        if (!details) return;
+
+        const show = gsap.to(details, {
+          maxHeight: 300,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power3.out",
+          paused: true,
+        });
+
+        const lift = gsap.to(card, {
+          y: -5,
+          borderColor: "var(--charm-accent-soft)",
+          duration: 0.35,
+          ease: "power2.out",
+          paused: true,
+        });
+
+        const imgReveal = img
+          ? gsap.to(img, {
+              filter: "brightness(1.1) contrast(1.05)",
+              duration: 0.35,
+              ease: "power2.out",
+              paused: true,
+            })
+          : null;
+
+        const topBorderTween = gsap.to(card, {
+          borderTopColor: "var(--charm-accent)",
+          duration: 0.35,
+          ease: "power2.out",
+          paused: true,
+        });
+
+        card.addEventListener("mouseenter", () => {
+          show.play();
+          lift.play();
+          imgReveal?.play();
+          topBorderTween.play();
+        });
+
+        card.addEventListener("mouseleave", () => {
+          show.reverse();
+          lift.reverse();
+          imgReveal?.reverse();
+          topBorderTween.reverse();
+      });
+    });
+  }
+</script>

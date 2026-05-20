@@ -1,0 +1,127 @@
+---
+import Tag from './Tag.astro';
+---
+
+<section id="experiencia" class="max-w-2xl mx-auto w-full px-8 py-24">
+  <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Experiencia</h2>
+
+  <div class="border-l-2 border-charm-border pl-6 space-y-12">
+    <article class="exp-item">
+      <time class="text-sm text-charm-accent font-medium tracking-wide">Nov 2025 — Presente</time>
+      <h3 class="text-2xl font-semibold text-charm-text mt-1">Desarrollador Full Stack</h3>
+      <p class="text-charm-muted-soft text-sm mt-1">
+        Startup 
+      </p>
+
+      <div class="text-charm-muted mt-4 leading-relaxed max-w-prose space-y-4">
+        <div>
+          <p>
+            Desarrollo de agentes con n8n para automatización de procesos y
+            processing de documentación KYC/KYB. Integración de flujos
+            headless con Directus sobre PostgreSQL. Plataforma interna en
+            React + TypeScript.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <Tag label="React" />
+            <Tag label="TypeScript" />
+            <Tag label="n8n" />
+            <Tag label="Directus" />
+            <Tag label="PostgreSQL" />
+            <Tag label="Git" />
+            
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="exp-item">
+      <time class="text-sm text-charm-accent font-medium tracking-wide">Ago 2024 — Mar 2026</time>
+      <h3 class="text-2xl font-semibold text-charm-text mt-1">Desarrollador Full Stack</h3>
+      <p class="text-charm-muted-soft text-sm mt-1">
+        SWEETTECH · Asignado a proyectos vía INSAITE
+      </p>
+
+      <div class="text-charm-muted mt-4 leading-relaxed max-w-prose space-y-5">
+        <div>
+          <p>
+            <strong class="text-charm-text">Validocu — TRAXION:</strong>
+            Sistema de validación documental con IA multimodal (LLM).
+            En la primera versión implementé el backend con Cloud Functions.
+            Al cliente le gustó tanto que quisieron implementarlo en varias
+            áreas del corporativo, lo que llevó a Validocu 2.0: un backend
+            multitenant con microservicios desplegados en GKE, integrando
+            PubSub para encolamiento de documentos (evitando errores de cuota).
+            Validocu tuvo una mejora de x15 en validaciones por documento por validador respecto al proceso manual.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <Tag label="Python" />
+            <Tag label="FastAPI"/>
+            <Tag label="Cloud Functions" />
+            <Tag label="GKE" />
+            <Tag label="PubSub" />
+            <Tag label="Vertex AI" />
+            <Tag label="Docker" />
+            <Tag label="Cloud Storage" />
+            <Tag label="Firestore" />
+            <Tag label="Secret Manager" />
+            <Tag label="Cloud Scheduler" />
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong class="text-charm-text">Confrontas UI — FERROMEX:</strong>
+            Desarrollo del ecosistema frontend en Flutter Web para la gestión operativa de confrontas, estructurado bajo Clean Architecture y modularización por features para garantizar escalabilidad. Con el fin de optimizar el ciclo DevOps, diseñé una CLI personalizada que automatiza el versionamiento y la entrega continua de la aplicación.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <Tag label="Flutter" />
+            <Tag label="Clean Architecture" />
+            <Tag label="Go" />
+            <Tag label="DevOps" />
+            <Tag label="Docker" />
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong class="text-charm-text">Sistema de Evidencias de PODs — TRAXION:</strong>
+            Desarrollo del ecosistema backend en Python para el registro, procesamiento y seguimiento 
+            automatizado de evidencias operativas provenientes de dispositivos móviles. 
+            La solución fue implementada bajo una arquitectura serverless utilizando Google Cloud Platform.
+            Para garantizar la escalabilidad y resiliencia del sistema, gestionando el despliegue mediante gcloud-cli.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <Tag label="Python" />
+            <Tag label="Cloud Functions" />
+            <Tag label="Firestore" />
+            <Tag label="Cloud Storage" />
+            <Tag label="gcloud-cli" />
+            <Tag label="Go" />
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong class="text-charm-text">ProShooter — Proyecto de Residencia Profesional:</strong>
+            Diseño e implementación de la arquitectura backend completa para una 
+            plataforma de seguimiento de sesiones de entrenamiento táctico de tiro. 
+            El proyecto destacó por el modelado y estructuración de una base de datos relacional 
+            de alta complejidad con más de 16 tablas, además de la integración, entrenamiento y 
+            despliegue de un modelo de CV con YOLOv8 para
+            la detección y conteo de impactos en blancos.
+          </p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <Tag label="FastAPI" />
+            <Tag label="PostgreSQL" />
+            <Tag label="YOLO" />
+            <Tag label="Python" />
+            <Tag label="Docker" />
+            <Tag label="AWS" />
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+  </div>
+</section>

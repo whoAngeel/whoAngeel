@@ -1,11 +1,77 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from "../components/Hero.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
 ---
 
-<Layout title="Angels Portfolio">
-	
-	<h1 class="text-3xl font-bold">Bienvenidos a mi portafolio</h1>
+<Layout title="whoAngeel — Ingeniero en Sistemas">
+  <main class="flex flex-col">
+    <Hero />
+    <Experience />
+    <Projects />
+    <Skills />
+    <Contact />
+  </main>
 </Layout>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    ScrollTrigger.getAll().forEach(t => t.disable());
+  } else {
+    // Hero — orchestrated entrance
+    gsap.from(".ascii-art", { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" });
+    gsap.from(".hero-name", { y: 50, opacity: 0, duration: 1, ease: "power4.out", delay: 0.2 });
+    gsap.from(".hero-role", { y: 25, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.4 });
+    gsap.from(".hero-desc", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.55 });
+
+    // Scroll reveals
+    gsap.utils.toArray(".section-title").forEach((title) => {
+      gsap.from(title as any, {
+        y: 35,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: { trigger: title as any, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+
+    gsap.utils.toArray(".exp-item").forEach((item) => {
+      gsap.from(item as any, {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: { trigger: item as any, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+
+    gsap.utils.toArray(".project-card").forEach((card) => {
+      gsap.from(card as any, {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        scrollTrigger: { trigger: card as any, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+
+    gsap.utils.toArray(".skill-cat").forEach((cat) => {
+      gsap.from(cat.querySelectorAll(".skill-tag") as any, {
+        y: 15,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: "power2.out",
+        scrollTrigger: { trigger: cat as any, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+  }
+</script>
