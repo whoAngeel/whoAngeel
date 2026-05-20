@@ -1,7 +1,8 @@
 
 ---
-const projects = [
+const raw = [
   {
+    order: 10,
     name: "Plataforma de Orquestación de Pagos Interoperables",
     images: ["/projects/hackathon_interledger_2025.png", "/projects/hackathon_interledger_2025_2.png"],
     badges: ["GCP", "OpenPayments SDK", "express.js", "Firestore", "Redis", "Docker"],
@@ -10,6 +11,7 @@ const projects = [
     detail: "API Node.js para pagos interoperables con Interledger y Open Payments. Ganadora del Interledger Hackathon 2025; incluye seguridad GNAP, dispersión automática de fondos y despliegue en Cloud Run con Docker."
   },
   {
+    order: 20,
     name: "Crowdfunding para Desastres Naturales",
     images: undefined,
     badges: ["Blockchain", "Web3", "Python"],
@@ -18,6 +20,7 @@ const projects = [
     detail: "Hackathon local → nacional/internacional con todo pagado. Ganamos porque resolvíamos problemas reales, no solo implementábamos la tecnología que la fundación quería."
   },
   {
+    order: 30,
     name: "Exoplanets with AI",
     images: undefined,
     badges: ["Python", "Machine Learning", "NASA", "Cloud Functions", "GCP"],
@@ -27,6 +30,7 @@ const projects = [
     code: "https://github.com/whoAngeel/exoplanets-with-ai"
   },
   {
+    order: 40,
     name: "Monitoreo de Vuelos CDMX",
     images: [
       "/projects/flight-monitor/image.png", 
@@ -39,6 +43,7 @@ const projects = [
     detail: "Aplicación web diseñada para centralizar, rastrear y administrar el flujo de operaciones aéreas en el espacio metropolitano de la Ciudad de México en tiempo real. La plataforma captura los datos de los vuelos, procesa sus itinerarios y los proyecta de forma inmediata en un panel de control interactivo, permitiendo a los usuarios supervisar despegues, aterrizajes y estados de las aeronaves."
   },
   {
+    order: 50,
     name: "Blockchain para Impacto Social",
     images: undefined,
     badges: ["Blockchain", "Solidity", "Web3"],
@@ -46,15 +51,9 @@ const projects = [
     winner: "🏆 GANADOR — Múltiples Hackathones",
     detail: "Soluciones con blockchain que ganaron en varios hackathones."
   },
+  
   {
-    name: "Control de Agua Comunitaria",
-    images: undefined,
-    badges: ["Python", "Web"],
-    tags: ["#ganador"],
-    winner: "🏆 GANADOR — La Salle",
-    detail: "Sistema para llevar control de los problemas de agua en una comunidad."
-  },
-  {
+    order: 60,
     name: "RAGO",
     images: [
       "/projects/rago/image.png",
@@ -68,6 +67,7 @@ const projects = [
     code: "https://github.com/whoAngeel/rago"
   },
   {
+    order: 70,
     name: "n8n-exporter",
     images: ["/projects/n8n-exporter/image-copy.png","/projects/n8n-exporter/image-copy-2.png", ],
     badges: ["Go", "Charm CLI", "TUI"],
@@ -76,6 +76,7 @@ const projects = [
     code: "https://github.com/whoAngeel/n8n-exporter"
   },
   {
+    order: 80,
     name: "SECI",
     images: undefined,
     badges: ["Python", "Web", "Base de Datos"],
@@ -83,6 +84,8 @@ const projects = [
     detail: "Sistema de Entradas para el Centro de Información. Contabilizaba las entradas a la biblioteca universitaria categorizando por carrera. Antes lo hacían manualmente con Excel."
   }
 ];
+
+const projects = [...raw].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 ---
 
 <section id="proyectos" class="max-w-6xl mx-auto w-full px-8 py-24">
