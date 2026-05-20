@@ -11,7 +11,7 @@ const raw = [
     detail: "API Node.js para pagos interoperables con Interledger y Open Payments. Ganadora del Interledger Hackathon 2025; incluye seguridad GNAP, dispersión automática de fondos y despliegue en Cloud Run con Docker."
   },
   {
-    order: 20,
+    order: 82,
     name: "Crowdfunding para Desastres Naturales",
     images: undefined,
     badges: ["Blockchain", "Web3", "Python"],
@@ -30,16 +30,16 @@ const raw = [
     code: "https://github.com/whoAngeel/exoplanets-with-ai"
   },
   {
-    order: 40,
+    order: 22,
     name: "Monitoreo de Vuelos CDMX",
     images: [
       "/projects/flight-monitor/image.png", 
       "/projects/flight-monitor/image2.png",
       "/projects/flight-monitor/image-3.png"
     ],
-    badges: ["Python", "Visualización", "API"],
+    badges: ["Python", "API", "React", "WebSockets", "snowflake"],
     tags: ["#ganador", "#hackathon"],
-    winner: "🏆 GANADOR — Hackathon Local",
+    winner: "🏆 GANADOR — Hackathon ITIZ 2025",
     detail: "Aplicación web diseñada para centralizar, rastrear y administrar el flujo de operaciones aéreas en el espacio metropolitano de la Ciudad de México en tiempo real. La plataforma captura los datos de los vuelos, procesa sus itinerarios y los proyecta de forma inmediata en un panel de control interactivo, permitiendo a los usuarios supervisar despegues, aterrizajes y estados de las aeronaves."
   },
   {
@@ -53,7 +53,7 @@ const raw = [
   },
   
   {
-    order: 60,
+    order: 1,
     name: "RAGO",
     images: [
       "/projects/rago/image.png",
@@ -76,7 +76,7 @@ const raw = [
     code: "https://github.com/whoAngeel/n8n-exporter"
   },
   {
-    order: 80,
+    order: 32,
     name: "SECI",
     images: undefined,
     badges: ["Python", "Web", "Base de Datos"],
@@ -85,7 +85,9 @@ const raw = [
   }
 ];
 
-const projects = [...raw].sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+const projects = [...raw]
+  .filter((p) => !p.hidden)
+  .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 ---
 
 <section id="proyectos" class="max-w-6xl mx-auto w-full px-8 py-24">
