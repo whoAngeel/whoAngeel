@@ -37,7 +37,7 @@ const categories = [
           </h3>
           <div class="flex flex-wrap gap-2">
             {cat.items.map((item) => (
-              <span class="skill-tag bg-charm-surface border border-charm-border/50 px-3 py-1.5 text-sm text-charm-muted rounded hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <span class="skill-tag bg-charm-surface border border-charm-border/50 px-3 py-1.5 text-sm text-charm-muted rounded hover:scale-105 hover:-translate-y-0.5 transition-[color,background,border-color] duration-200 cursor-default">
                 {item}
               </span>
             ))}
@@ -49,9 +49,49 @@ const categories = [
 </section>
 
 <style is:global>
+  .skill-tag {
+    will-change: transform, opacity;
+  }
   .skill-tag:hover {
     background: rgba(124, 58, 237, 0.12);
     border-color: rgba(124, 58, 237, 0.5);
     color: var(--charm-accent-soft);
   }
+  .skill-cat {
+    will-change: transform, opacity;
+  }
 </style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.utils.toArray(".skill-cat").forEach((cat) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: cat,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      tl.from(cat, {
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power3.out"
+      });
+
+      tl.from(cat.querySelectorAll(".skill-tag"), {
+        y: 12,
+        opacity: 0,
+        duration: 0.35,
+        stagger: 0.06,
+        ease: "power2.out"
+      }, "-=0.2");
+    });
+  }
+</script>
