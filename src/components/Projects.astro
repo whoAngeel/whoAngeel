@@ -91,6 +91,8 @@ const raw = [
 const projects = [...raw]
   .filter((p) => !p.hidden)
   .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="proyectos" class="max-w-5xl mx-auto w-full px-8 py-24">
@@ -108,7 +110,7 @@ const projects = [...raw]
               <div class="relative w-full h-full" data-carousel={i}>
                 {p.images.map((img, j) => (
                   <img
-                    src={img}
+                    src={base + img}
                     alt={`${p.name} - ${j + 1}`}
                     class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
                     class:list={j === 0 ? "opacity-100" : "opacity-0"}
