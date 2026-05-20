@@ -138,8 +138,10 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
       isIdle = false;
       blinkOn = true;
       idleTimer = setTimeout(() => {
-        if (cells.size === 0 || overInteractive) return;
+        if (overInteractive) return;
+        if (cells.size === 0 && lastCellKey) cells.set(lastCellKey, performance.now());
         isIdle = true;
+        if (!raf) raf = requestAnimationFrame(tick);
         blinkRaf = setInterval(() => { blinkOn = !blinkOn; }, 530);
       }, IDLE_MS);
     }
