@@ -19,10 +19,11 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     <body>
         <div id="loader">
             <div class="loader-content">
-                <div class="loader-label">cargando</div>
+                <div class="loader-pct" id="loader-pct">0%</div>
                 <div id="loader-bar-track">
                     <div id="loader-bar"></div>
                 </div>
+                <div class="loader-label">cargando</div>
             </div>
         </div>
         <canvas id="grid-paint" aria-hidden="true"></canvas>
@@ -32,19 +33,21 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     <script>
         (() => {
             const bar = document.getElementById("loader-bar");
+            const pct = document.getElementById("loader-pct");
             const wrap = document.getElementById("loader");
             if (!bar || !wrap) return;
             let w = 0;
             const step = () => {
-                w += Math.random() * 8 + 2;
-                if (w >= 100) { w = 100; bar.style.width = "100%"; }
+                w += Math.random() * 6 + 1.5;
+                if (w >= 100) { w = 100; bar.style.width = "100%"; pct.textContent = "100%"; }
                 bar.style.width = w + "%";
+                pct.textContent = Math.round(w) + "%";
                 if (w < 100) requestAnimationFrame(step);
                 else {
                     setTimeout(() => {
                         wrap.classList.add("loader-hidden");
                         setTimeout(() => wrap.remove(), 500);
-                    }, 300);
+                    }, 400);
                 }
             };
             requestAnimationFrame(step);
@@ -76,30 +79,47 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
   }
 
   .loader-content {
-    width: 160px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
   }
 
+  .loader-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--charm-muted);
+  }
+
+  .loader-pct {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--charm-accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
   #loader-bar-track {
     width: 100%;
-    height: 4px;
-    background: var(--charm-border);
-    border-radius: 2px;
+    height: 14px;
+    background: var(--charm-surface);
+    border: 1px solid var(--charm-border);
+    border-radius: 4px;
     overflow: hidden;
+    padding: 2px;
   }
 
   #loader-bar {
     height: 100%;
     width: 0%;
-    background: var(--charm-accent);
+    background: linear-gradient(90deg, var(--charm-accent), var(--charm-accent-soft));
     border-radius: 2px;
     box-shadow:
       0 0 8px var(--charm-accent),
-      0 0 16px var(--charm-accent);
-    transition: width 0.1s linear;
+      0 0 20px var(--charm-accent);
+    transition: width 0.12s ease-out;
   }
 
   .loader-label {
