@@ -2,22 +2,29 @@
 
 ---
 
-<header class="sticky top-0 z-50 flex items-center justify-between py-3 px-8 w-full border-b border-charm-border bg-charm-bg" id="header">
-  <div class="flex items-center gap-10">
-    <a href="#" class="brand-link text-charm-text no-underline select-none">
+<header class="sticky top-0 z-50 flex items-center justify-between py-3 px-4 sm:px-8 w-full border-b border-charm-border bg-charm-bg" id="header">
+  <div class="flex items-center gap-4 sm:gap-10 min-w-0">
+    <a href="#" class="brand-link text-charm-text no-underline select-none shrink-0">
       whoAngeel<span class="cursor">_</span>
     </a>
-    <nav class="flex items-center gap-x-10">
-      <a href="#experiencia" class="nav-link">Experiencia</a>
-      <a href="#proyectos" class="nav-link">Proyectos</a>
-      <a href="#habilidades" class="nav-link">Habilidades</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
+    <nav class="flex items-center gap-x-4 sm:gap-x-10 overflow-x-auto scrollbar-hide">
+      <a href="#experiencia" class="nav-link shrink-0">Experiencia</a>
+      <a href="#proyectos" class="nav-link shrink-0">Proyectos</a>
+      <a href="#habilidades" class="nav-link shrink-0">Habilidades</a>
+      <a href="#contacto" class="nav-link shrink-0">Contacto</a>
     </nav>
   </div>
-  <button class="cta-btn bg-charm-accent text-charm-text font-medium text-sm px-4 py-1.5 rounded">Descargar CV</button>
+  <button class="cta-btn bg-charm-accent text-charm-text font-medium text-xs sm:text-sm px-3 sm:px-4 py-1.5 rounded shrink-0">Descargar CV</button>
 </header>
 
 <style is:global>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+
   .brand-link {
     font-size: 0.875rem;
     font-weight: 600;
