@@ -1,52 +1,42 @@
----
----
-
 <section id="contacto" class="max-w-5xl mx-auto w-full px-8 py-24">
   <h2 class="section-title text-4xl font-bold text-charm-text mb-3">Contacto</h2>
-  <p class="text-charm-muted mb-8 leading-relaxed max-w-lg">
+  <p class="text-charm-muted mb-10 leading-relaxed max-w-lg">
     Estoy abierto a colaboraciones, oportunidades o solo un café virtual.
-    Si tienes un proyecto en mente o quieres platicar, aquí estoy.
   </p>
 
-  <div class="max-w-lg space-y-4">
-    <a href="mailto:whoangel.agl@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-4 bg-charm-surface border border-charm-border rounded px-5 py-4 text-charm-text">
-      <span class="contact-icon text-charm-accent text-lg shrink-0 w-6 text-center">✉</span>
+  <div class="max-w-lg space-y-3">
+    <a href="mailto:whoangel.agl@gmail.com" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
+      <span class="font-mono text-charm-accent shrink-0">$</span>
+      <span class="font-mono text-charm-muted-soft shrink-0">mail</span>
       <span>whoangel.agl@gmail.com</span>
     </a>
 
-    <a href="https://github.com/whoAngeel" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-4 bg-charm-surface border border-charm-border rounded px-5 py-4 text-charm-text">
-      <span class="contact-icon text-charm-accent text-lg shrink-0 w-6 text-center">⌨</span>
+    <a href="https://github.com/whoAngeel" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
+      <span class="font-mono text-charm-accent shrink-0">$</span>
+      <span class="font-mono text-charm-muted-soft shrink-0">gh</span>
       <span>github.com/whoAngeel</span>
     </a>
 
-    <a href="https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-269a9b296/" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-4 bg-charm-surface border border-charm-border rounded px-5 py-4 text-charm-text">
-      <span class="contact-icon text-charm-accent text-lg shrink-0 w-6 text-center">🔗</span>
+    <a href="https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-269a9b296/" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
+      <span class="font-mono text-charm-accent shrink-0">$</span>
+      <span class="font-mono text-charm-muted-soft shrink-0">in</span>
       <span>linkedin.com/in/angel-jesus-zorrilla-cuevas</span>
     </a>
   </div>
 </section>
 
-<script>
-  import gsap from "gsap";
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.querySelectorAll(".contact-link").forEach((link) => {
-      const icon = link.querySelector(".contact-icon");
-
-      const iconBounce = icon
-        ? gsap.to(icon, { x: 4, duration: 0.3, ease: "power2.out", paused: true })
-        : null;
-
-      link.addEventListener("mouseenter", () => {
-        gsap.to(link, { borderColor: "var(--charm-accent)", duration: 0.25, ease: "power2.out" });
-        gsap.to(link, { x: 3, duration: 0.25, ease: "power2.out" });
-        iconBounce?.play();
-      });
-
-      link.addEventListener("mouseleave", () => {
-        gsap.to(link, { borderColor: "var(--charm-border)", x: 0, duration: 0.3, ease: "power2.out" });
-        iconBounce?.reverse();
-      });
-    });
+<style is:global>
+  .contact-link {
+    transition: border-color 0.2s, transform 0.2s;
   }
-</script>
+  .contact-link:hover {
+    border-color: var(--charm-accent);
+    transform: translateX(4px);
+  }
+  .contact-link:hover span:last-child {
+    color: var(--charm-accent-soft);
+  }
+  .contact-link span:last-child {
+    transition: color 0.2s;
+  }
+</style>

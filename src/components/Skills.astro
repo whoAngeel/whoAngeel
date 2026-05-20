@@ -29,13 +29,15 @@ const categories = [
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     {
       categories.map((cat, i) => (
-        <div class="skill-cat" class:list={{ "md:col-span-2": i === categories.length - 1 }}>
-          <h3 class="text-charm-accent font-mono text-sm font-semibold tracking-wide mb-4">
-            <span class="text-charm-muted-soft">$ </span>{cat.name}
+        <div class:list={["skill-cat", { "md:col-span-2": i === categories.length - 1 }]}>
+          <h3 class="flex items-center gap-2 text-charm-text font-semibold text-sm mb-4 tracking-wide">
+            <span class="font-mono text-charm-accent font-normal tabular-nums">0{i + 1}</span>
+            <span>{cat.name}</span>
+            <span class="flex-1 h-px bg-charm-border/40"></span>
           </h3>
           <div class="flex flex-wrap gap-2">
             {cat.items.map((item) => (
-              <span class="skill-tag bg-charm-surface border border-charm-border/60 px-3 py-1.5 text-sm text-charm-muted rounded hover:bg-charm-surface-strong hover:text-charm-text hover:border-charm-accent/40 hover:scale-105 transition-all duration-200 cursor-default">
+              <span class="skill-tag bg-charm-surface border border-charm-border/50 px-3 py-1.5 text-sm text-charm-muted rounded hover:scale-105 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
                 {item}
               </span>
             ))}
@@ -45,3 +47,11 @@ const categories = [
     }
   </div>
 </section>
+
+<style is:global>
+  .skill-tag:hover {
+    background: rgba(124, 58, 237, 0.12);
+    border-color: rgba(124, 58, 237, 0.5);
+    color: var(--charm-accent-soft);
+  }
+</style>
