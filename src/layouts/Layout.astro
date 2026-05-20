@@ -51,10 +51,8 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
-    const GX = 10;
-    const GY = 20;
-    const SIZE = 2;
-    const FADE = 1000;
+    const PX = 16;
+    const FADE = 800;
 
     let w, h;
 
@@ -67,12 +65,12 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     let lastX, lastY;
 
     function paintAt(mx, my) {
-      const c = Math.round(mx / GX);
-      const r = Math.round(my / GY);
-      const x = c * GX;
-      const y = r * GY;
-      if (x < 0 || y < 0 || x > w || y > h) return;
-      cells.set(c + ":" + r, performance.now());
+      const c = Math.floor(mx / PX);
+      const r = Math.floor(my / PX);
+      if (c < 0 || r < 0 || c * PX > w || r * PX > h) return;
+      const key = c + ":" + r;
+      cells.set(key, performance.now());
+      lastCellKey = key;
     }
 
     function onMove(e) {
@@ -93,28 +91,79 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     }
 
     let raf;
+    let idleTimer;
+    let isIdle = false;
+    let blinkOn = true;
+    let blinkRaf;
+    let lastCellKey;
+    let overInteractive = false;
+    const IDLE_MS = 1500;
+
+    function isInteractive(el) {
+      if (!el) return false;
+      const tag = el.tagName.toLowerCase();
+      if (["button", "a", "input", "textarea", "select"].includes(tag)) return true;
+      if (el.closest("[role=button], .contact-link, .carousel-zone, .cta-btn, .nav-link, .project-card, .skill-tag, .project-badge, .tags-overlay, button")) return true;
+      return false;
+    }
 
     function tick() {
+      if (overInteractive) { raf = null; return; }
       const now = performance.now();
       ctx.clearRect(0, 0, w, h);
 
       for (const [key, t0] of cells) {
         const age = now - t0;
         if (age > FADE) { cells.delete(key); continue; }
-        const a = (1 - age / FADE).toFixed(3);
+        let a;
+        if (isIdle && key === lastCellKey) {
+          a = blinkOn ? "1" : "0";
+        } else {
+          a = (1 - age / FADE).toFixed(3);
+        }
         ctx.fillStyle = "rgba(157,121,243," + a + ")";
         const [c, r] = key.split(":").map(Number);
-        ctx.fillRect(c * GX - SIZE / 2, r * GY - SIZE / 2, SIZE, SIZE);
+        ctx.fillRect(c * PX, r * PX, PX, PX);
       }
 
       if (cells.size > 0) raf = requestAnimationFrame(tick);
       else raf = null;
     }
 
-    function start() { if (!raf) raf = requestAnimationFrame(tick); }
+    function start() { if (!raf && !overInteractive) raf = requestAnimationFrame(tick); }
 
-    document.addEventListener("mousemove", (e) => { onMove(e); start(); });
-    document.addEventListener("mouseleave", () => { lastX = lastY = undefined; });
+    function resetIdle() {
+      clearTimeout(idleTimer);
+      clearInterval(blinkRaf);
+      isIdle = false;
+      blinkOn = true;
+      idleTimer = setTimeout(() => {
+        if (cells.size === 0 || overInteractive) return;
+        isIdle = true;
+        blinkRaf = setInterval(() => { blinkOn = !blinkOn; }, 530);
+      }, IDLE_MS);
+    }
+
+    function onDocMove(e) {
+      const target = e.target;
+      overInteractive = isInteractive(target);
+      if (overInteractive) {
+        document.body.style.cursor = "auto";
+        ctx.clearRect(0, 0, w, h);
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+        clearTimeout(idleTimer);
+        clearInterval(blinkRaf);
+        isIdle = false;
+        return;
+      }
+      document.body.style.cursor = "none";
+      onMove(e);
+      start();
+      resetIdle();
+    }
+
+    document.addEventListener("mousemove", onDocMove);
+    document.addEventListener("mouseleave", () => { lastX = lastY = undefined; clearTimeout(idleTimer); clearInterval(blinkRaf); isIdle = false; });
     window.addEventListener("resize", resize);
     resize();
   })();
