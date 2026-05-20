@@ -114,7 +114,10 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
 
       for (const [key, t0] of cells) {
         const age = now - t0;
-        if (age > FADE) { cells.delete(key); continue; }
+        if (age > FADE) {
+          if (isIdle && key === lastCellKey) { cells.set(key, now); continue; }
+          cells.delete(key); continue;
+        }
         let a;
         if (isIdle && key === lastCellKey) {
           a = blinkOn ? "1" : "0";
