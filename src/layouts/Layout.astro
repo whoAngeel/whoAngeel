@@ -78,6 +78,16 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     transition: opacity 0.4s;
   }
 
+  #loader::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px) 0 0 / 10px 20px,
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px) 0 0 / 10px 20px;
+  }
+
   .loader-content {
     width: 200px;
     display: flex;
@@ -103,22 +113,20 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
 
   #loader-bar-track {
     width: 100%;
-    height: 14px;
+    height: 16px;
     background: var(--charm-surface);
-    border: 1px solid var(--charm-border);
-    border-radius: 4px;
+    border-radius: 0;
     overflow: hidden;
-    padding: 2px;
   }
 
   #loader-bar {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, var(--charm-accent), var(--charm-accent-soft));
-    border-radius: 2px;
+    border-radius: 0;
     box-shadow:
-      0 0 8px var(--charm-accent),
-      0 0 20px var(--charm-accent);
+      0 0 6px var(--charm-accent),
+      0 0 14px var(--charm-accent);
     transition: width 0.12s ease-out;
   }
 
