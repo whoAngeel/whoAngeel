@@ -17,7 +17,106 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
         <BaseAstro title={title} description={description}/>
     </head>
     <body>
+        <canvas id="grid-paint" aria-hidden="true"></canvas>
 		<Header />
         <slot />
     </body>
+<style>
+  body {
+    cursor: none;
+  }
+
+  #grid-paint {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (hover: none) {
+    body {
+      cursor: auto;
+    }
+    #grid-paint {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    if (window.matchMedia("(hover: none)").matches) return;
+
+    const canvas = document.getElementById("grid-paint");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const GX = 10;
+    const GY = 20;
+    const SIZE = 2;
+    const FADE = 1000;
+
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    const cells = new Map();
+    let lastX, lastY;
+
+    function paintAt(mx, my) {
+      const c = Math.round(mx / GX);
+      const r = Math.round(my / GY);
+      const x = c * GX;
+      const y = r * GY;
+      if (x < 0 || y < 0 || x > w || y > h) return;
+      cells.set(c + ":" + r, performance.now());
+    }
+
+    function onMove(e) {
+      const mx = e.clientX;
+      const my = e.clientY;
+      if (lastX !== undefined) {
+        const dx = mx - lastX;
+        const dy = my - lastY;
+        const n = Math.max(Math.abs(dx), Math.abs(dy));
+        for (let t = 0; t <= n; t++) {
+          paintAt(lastX + (dx * t) / n, lastY + (dy * t) / n);
+        }
+      } else {
+        paintAt(mx, my);
+      }
+      lastX = mx;
+      lastY = my;
+    }
+
+    let raf;
+
+    function tick() {
+      const now = performance.now();
+      ctx.clearRect(0, 0, w, h);
+
+      for (const [key, t0] of cells) {
+        const age = now - t0;
+        if (age > FADE) { cells.delete(key); continue; }
+        const a = (1 - age / FADE).toFixed(3);
+        ctx.fillStyle = "rgba(157,121,243," + a + ")";
+        const [c, r] = key.split(":").map(Number);
+        ctx.fillRect(c * GX - SIZE / 2, r * GY - SIZE / 2, SIZE, SIZE);
+      }
+
+      if (cells.size > 0) raf = requestAnimationFrame(tick);
+      else raf = null;
+    }
+
+    function start() { if (!raf) raf = requestAnimationFrame(tick); }
+
+    document.addEventListener("mousemove", (e) => { onMove(e); start(); });
+    document.addEventListener("mouseleave", () => { lastX = lastY = undefined; });
+    window.addEventListener("resize", resize);
+    resize();
+  })();
+</script>
 </html>

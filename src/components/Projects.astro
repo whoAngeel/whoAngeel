@@ -2,86 +2,136 @@
 ---
 const projects = [
   {
+    name: "Plataforma de Orquestación de Pagos Interoperables",
+    images: ["/projects/hackathon_interledger_2025.png", "/projects/hackathon_interledger_2025_2.png"],
+    badges: ["GCP", "OpenPayments SDK", "express.js", "Firestore", "Redis", "Docker"],
+    tags: ["#ganador", "#hackathon"],
+    winner: "🏆 GANADOR — Interledger Hackathon 2025",
+    detail: "API Node.js para pagos interoperables con Interledger y Open Payments. Ganadora del Interledger Hackathon 2025; incluye seguridad GNAP, dispersión automática de fondos y despliegue en Cloud Run con Docker."
+  },
+  {
     name: "Crowdfunding para Desastres Naturales",
-    image: undefined,
+    images: undefined,
     badges: ["Blockchain", "Web3", "Python"],
+    tags: ["#ganador", "#blockchain"],
     winner: "🏆 GANADOR — Interledger Foundation",
     detail: "Hackathon local → nacional/internacional con todo pagado. Ganamos porque resolvíamos problemas reales, no solo implementábamos la tecnología que la fundación quería."
   },
   {
     name: "Exoplanets with AI",
-    image: undefined,
-    badges: ["Python", "Machine Learning", "NASA"],
-    winner: "🌍 TOP GLOBAL — NASA Space Apps",
-    detail: "Clasificación de exoplanetas con inteligencia artificial. Entró en los tops globales del hackathon de la NASA.",
+    images: undefined,
+    badges: ["Python", "Machine Learning", "NASA", "Cloud Functions", "GCP"],
+    tags: ["#top", "#nasa"],
+    winner: "🌍 TOP NACIONAL — NASA Space Apps Challenge 2025",
+    detail: "plicación web interactiva diseñada para democratizar el estudio de exoplanetas mediante Inteligencia Artificial, desarrollada como proyecto destacado en la etapa nacional del hackathon de la NASA. La herramienta unifica datos públicos de misiones espaciales y utiliza modelos predictivos para evaluar y visualizar las características y el análisis de habitabilidad de mundos distantes en tiempo real.",
     code: "https://github.com/whoAngeel/exoplanets-with-ai"
   },
   {
     name: "Monitoreo de Vuelos CDMX",
-    image: undefined,
+    images: [
+      "/projects/flight-monitor/image.png", 
+      "/projects/flight-monitor/image2.png",
+      "/projects/flight-monitor/image-3.png"
+    ],
     badges: ["Python", "Visualización", "API"],
+    tags: ["#ganador", "#hackathon"],
     winner: "🏆 GANADOR — Hackathon Local",
-    detail: "Sistema de monitoreo de vuelos en el área de la CDMX. Ganamos entre varios equipos."
+    detail: "Aplicación web diseñada para centralizar, rastrear y administrar el flujo de operaciones aéreas en el espacio metropolitano de la Ciudad de México en tiempo real. La plataforma captura los datos de los vuelos, procesa sus itinerarios y los proyecta de forma inmediata en un panel de control interactivo, permitiendo a los usuarios supervisar despegues, aterrizajes y estados de las aeronaves."
   },
   {
     name: "Blockchain para Impacto Social",
-    image: undefined,
+    images: undefined,
     badges: ["Blockchain", "Solidity", "Web3"],
+    tags: ["#ganador", "#blockchain"],
     winner: "🏆 GANADOR — Múltiples Hackathones",
     detail: "Soluciones con blockchain que ganaron en varios hackathones."
   },
   {
     name: "Control de Agua Comunitaria",
-    image: undefined,
+    images: undefined,
     badges: ["Python", "Web"],
+    tags: ["#ganador"],
     winner: "🏆 GANADOR — La Salle",
     detail: "Sistema para llevar control de los problemas de agua en una comunidad."
   },
   {
     name: "RAGO",
-    image: undefined,
-    badges: ["Go", "React", "PostgreSQL", "Qdrant"],
-    detail: "Proyecto fullstack para RAG. Backend en Go, base de datos PostgreSQL y vectorial en Qdrant, frontend en React.",
+    images: [
+      "/projects/rago/image.png",
+      "/projects/rago/image-copy.png",
+      "/projects/rago/image-3.png",
+      "/projects/rago/image-4.png",
+    ],
+    badges: ["Go", "RAG", "PostgreSQL", "Qdrant", "LangChain", "React", "JWT"],
+    tags: ["#personal"],
+    detail: "Sistema de Recuperación Aumentada por Generación (RAG) diseñado para la gestión y consulta inteligente de documentos. Permite a usuarios autenticados subir archivos y organizarlos en colecciones indexadas, generando salas de chat dinámicas basadas en esos documentos para que usuarios externos y sin autenticación puedan realizar consultas y conversar directamente con la información.",
     code: "https://github.com/whoAngeel/rago"
   },
   {
     name: "n8n-exporter",
-    image: undefined,
+    images: ["/projects/n8n-exporter/image-copy.png","/projects/n8n-exporter/image-copy-2.png", ],
     badges: ["Go", "Charm CLI", "TUI"],
-    detail: "Tool para exportar workflows de n8n. Hecha en Go con Charm para interfaz TUI moderna. Línea de comandos.",
+    tags: ["#personal"],
+    detail: "Herramienta diseñada para simplificar la exportación de workflows en n8n. Automatiza la limpieza de los flujos y elimina datos basura o temporales.",
     code: "https://github.com/whoAngeel/n8n-exporter"
   },
   {
     name: "SECI",
-    image: undefined,
+    images: undefined,
     badges: ["Python", "Web", "Base de Datos"],
+    tags: ["#personal"],
     detail: "Sistema de Entradas para el Centro de Información. Contabilizaba las entradas a la biblioteca universitaria categorizando por carrera. Antes lo hacían manualmente con Excel."
   }
 ];
 ---
 
-<section id="proyectos" class="max-w-5xl mx-auto w-full px-8 py-24">
+<section id="proyectos" class="max-w-6xl mx-auto w-full px-8 py-24">
   <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Proyectos</h2>
 
-  <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {
       projects.map((p, i) => (
         <article
           class="project-card bg-charm-surface border border-charm-border border-t-2 border-t-charm-accent/10 rounded overflow-hidden group cursor-default"
           data-index={i}
         >
-          <div class="project-img h-36 md:h-40 bg-charm-surface-strong border-b border-charm-border flex items-center justify-center text-charm-muted-soft text-xs select-none overflow-hidden relative">
-            {p.image
-              ? <img src={p.image} alt={p.name} class="w-full h-full object-cover" />
-              : <span class="font-mono tracking-wide opacity-25 text-charm-muted-soft">[ {p.name.split(" ")[0].toLowerCase()} ]</span>
-            }
-            {p.winner && (
-              <span class="absolute top-2 right-2 bg-charm-accent text-charm-text text-[10px] font-semibold px-2 py-0.5 rounded tracking-wider uppercase max-w-[calc(100%-1rem)] truncate">{p.winner.split("—")[0].trim()}</span>
+          <div class="project-img h-40 md:h-52 bg-charm-surface-strong border-b border-charm-border flex items-center justify-center text-charm-muted-soft text-xs select-none overflow-hidden relative">
+            {p.images && p.images.length > 0 ? (
+              <div class="relative w-full h-full" data-carousel={i}>
+                {p.images.map((img, j) => (
+                  <img
+                    src={img}
+                    alt={`${p.name} - ${j + 1}`}
+                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                    class:list={j === 0 ? "opacity-100" : "opacity-0"}
+                    data-img={j}
+                  />
+                ))}
+                {p.images.length > 1 && (
+                  <div class="carousel-nav absolute inset-0 z-10">
+                    <div class="absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center justify-start pl-2 cursor-pointer carousel-zone" data-nav="prev" role="button" tabindex="0" aria-label="Anterior">
+                      <span class="carousel-arrow flex items-center justify-center w-8 h-8 rounded-full bg-black/60 text-charm-accent font-mono text-xl font-bold hover:bg-black/80 transition-colors">&lt;</span>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 w-2/5 bg-gradient-to-l from-black/70 via-black/30 to-transparent flex items-center justify-end pr-2 cursor-pointer carousel-zone" data-nav="next" role="button" tabindex="0" aria-label="Siguiente">
+                      <span class="carousel-arrow flex items-center justify-center w-8 h-8 rounded-full bg-black/60 text-charm-accent font-mono text-xl font-bold hover:bg-black/80 transition-colors">&gt;</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <span class="font-mono tracking-wide opacity-25 text-charm-muted-soft">[ {p.name.split(" ")[0].toLowerCase()} ]</span>
+            )}
+            {p.tags && p.tags.length > 0 && (
+              <div class="tags-overlay absolute bottom-1.5 left-1.5 flex flex-wrap gap-1 z-10">
+                {p.tags.map(tag => (
+                  <span class="bg-charm-bg/85 backdrop-blur-sm text-charm-accent text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded leading-none shadow-sm">{tag}</span>
+                ))}
+              </div>
             )}
           </div>
 
           <div class="px-5 py-4">
-            <h3 class="text-lg md:text-xl font-semibold text-charm-text">{p.name}</h3>
+            <h3 class="text-xl md:text-2xl font-semibold text-charm-text">{p.name}</h3>
 
             <div class="flex flex-wrap gap-1.5 mt-2">
               {p.badges.map(badge => (
@@ -93,7 +143,7 @@ const projects = [
               {p.winner && (
                 <p class="text-charm-accent text-xs tracking-wide font-semibold mt-3 leading-relaxed">{p.winner}</p>
               )}
-              <p class="text-sm text-charm-muted mt-2 leading-relaxed">{p.detail}</p>
+              <p class="text-sm md:text-base text-charm-muted mt-2 leading-relaxed">{p.detail}</p>
               {p.code && (
                 <div class="flex gap-3 mt-3">
                   <a href={p.code} class="text-sm text-charm-accent hover:text-charm-accent-strong font-medium transition-colors">Codigo →</a>
@@ -106,6 +156,44 @@ const projects = [
     }
   </div>
 </section>
+
+<style is:global>
+  .carousel-arrow {
+    transition: opacity 0.2s, background 0.2s;
+  }
+
+  .carousel-zone {
+    transition: opacity 0.2s;
+  }
+
+  .tags-overlay {
+    transition: opacity 0.2s;
+  }
+
+  @media (hover: hover) {
+    .carousel-arrow,
+    .carousel-zone {
+      opacity: 0;
+    }
+    .group:hover .carousel-arrow,
+    .group:hover .carousel-zone {
+      opacity: 1;
+    }
+    .group:hover .tags-overlay {
+      opacity: 0;
+    }
+  }
+
+  @media (hover: none) {
+    .carousel-arrow,
+    .carousel-zone {
+      opacity: 1;
+    }
+    .tags-overlay {
+      opacity: 1;
+    }
+  }
+</style>
 
 <script>
   const cards = document.querySelectorAll(".project-card");
@@ -176,4 +264,32 @@ const projects = [
       });
     });
   }
+
+  // Carousel — infinite loop cycling
+  const idxMap = new Map();
+
+  document.querySelectorAll("[data-carousel]").forEach((el) => {
+    idxMap.set(el, 0);
+  });
+
+  document.querySelectorAll("[data-nav]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const container = btn.closest("[data-carousel]");
+      const imgs = container.querySelectorAll("[data-img]");
+      const total = imgs.length;
+      if (total < 2) return;
+
+      let curr = idxMap.get(container) || 0;
+      const dir = btn.dataset.nav;
+      const next = (((curr + (dir === "next" ? 1 : -1)) % total) + total) % total;
+
+      imgs.forEach((img, j) => {
+        img.classList.toggle("opacity-100", j === next);
+        img.classList.toggle("opacity-0", j !== next);
+      });
+
+      idxMap.set(container, next);
+    });
+  });
 </script>
