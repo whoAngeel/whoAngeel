@@ -3,11 +3,11 @@
 const raw = [
   {
     order: 15,
-    name: "FoundUP — Crowdfunding con Interledger",
+    name: "FundUP — Crowdfunding con Open Payments",
     images: ["/projects/fundup/image1.png", "/projects/fundup/image2.png", "/projects/fundup/image3.png"],
-    badges: ["NestJS", "TypeScript", "MongoDB", "Redis", "Docker", "Interledger"],
-    tags: ["#ganador", "#interledger"],
-    winner: "🏆 GANADOR — Interledger Hackathon",
+    badges: ["NestJS", "TypeScript", "MongoDB", "Redis", "Docker", "Open Payments"],
+    tags: ["#ganador", "#openpayments", "#hackathon"],
+    winner: "🏆 GANADOR — Open Payments Hackathon",
     detail: "Backend en NestJS para plataforma de crowdfunding con pagos vía Open Payments e Interledger. Arquitectura modular con MongoDB, Redis, autenticación JWT y webhooks. Despliegue con Docker.",
     code: "https://github.com/whoAngeel/fundup-backend"
   },
@@ -15,6 +15,7 @@ const raw = [
     order: 20,
     name: "Crowdfunding para Desastres Naturales",
     images: undefined,
+    hidden: true,
     badges: ["Blockchain", "Web3", "Python"],
     tags: ["#ganador", "#blockchain"],
     winner: "🏆 GANADOR — Interledger Foundation",
@@ -81,8 +82,8 @@ const raw = [
     order: 28,
     name: "SECI",
     images: undefined,
-    badges: ["Python", "Web", "Base de Datos"],
-    tags: ["#personal"],
+    badges: ["Flutter", "HIVE"],
+    tags: ["#personal", "#escolar"],
     detail: "Sistema de Entradas para el Centro de Información. Contabilizaba las entradas a la biblioteca universitaria categorizando por carrera. Antes lo hacían manualmente con Excel."
   }
 ];
@@ -92,7 +93,7 @@ const projects = [...raw]
   .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 ---
 
-<section id="proyectos" class="max-w-6xl mx-auto w-full px-8 py-24">
+<section id="proyectos" class="max-w-5xl mx-auto w-full px-8 py-24">
   <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Proyectos</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
