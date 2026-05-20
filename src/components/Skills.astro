@@ -1,62 +1,47 @@
 ---
+const categories = [
+  {
+    name: "Backend",
+    items: ["Python", "Go", "Node.js", "NestJS", "FastAPI", "Express.js", "PostgreSQL", "MongoDB", "Redis"]
+  },
+  {
+    name: "Cloud & DevOps",
+    items: ["GCP", "GKE", "Cloud Functions", "PubSub", "Firestore", "Vertex AI", "Docker", "Kubernetes", "Cloud Run"]
+  },
+  {
+    name: "Frontend",
+    items: ["Astro", "React", "TypeScript", "Tailwind", "Flutter", "GSAP"]
+  },
+  {
+    name: "AI & ML",
+    items: ["LLM Multimodal", "YOLO", "n8n", "Qdrant", "LangChain"]
+  },
+  {
+    name: "Herramientas",
+    items: ["Git", "Linux", "Charm CLI", "Go TUI", "gcloud CLI"]
+  }
+];
 ---
 
-<section id="habilidades" class="max-w-2xl mx-auto w-full px-8 py-24">
+<section id="habilidades" class="max-w-5xl mx-auto w-full px-8 py-24">
   <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Habilidades</h2>
 
-  <div class="skills-group space-y-8">
-    <div class="skill-cat">
-      <h3 class="text-lg font-semibold text-charm-text mb-3">Backend</h3>
-      <div class="flex flex-wrap gap-2">
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Python</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Go</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Node.js</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">FastAPI</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">PostgreSQL</span>
-      </div>
-    </div>
-
-    <div class="skill-cat">
-      <h3 class="text-lg font-semibold text-charm-text mb-3">Cloud & DevOps</h3>
-      <div class="flex flex-wrap gap-2">
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">GCP</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Kubernetes</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">PubSub</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Vertex AI</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Firestore</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Docker</span>
-      </div>
-    </div>
-
-    <div class="skill-cat">
-      <h3 class="text-lg font-semibold text-charm-text mb-3">Frontend</h3>
-      <div class="flex flex-wrap gap-2">
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Astro</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">React</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">TypeScript</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Tailwind</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Flutter</span>
-      </div>
-    </div>
-
-    <div class="skill-cat">
-      <h3 class="text-lg font-semibold text-charm-text mb-3">AI & ML</h3>
-      <div class="flex flex-wrap gap-2">
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">LLM Multimodal</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">YOLO</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">n8n</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Qdrant</span>
-      </div>
-    </div>
-
-    <div class="skill-cat">
-      <h3 class="text-lg font-semibold text-charm-text mb-3">Herramientas</h3>
-      <div class="flex flex-wrap gap-2">
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Git</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Linux</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Charm CLI</span>
-        <span class="skill-tag bg-charm-surface border border-charm-border px-3 py-1 text-sm text-charm-muted rounded">Go TUI</span>
-      </div>
-    </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {
+      categories.map((cat, i) => (
+        <div class="skill-cat" class:list={{ "md:col-span-2": i === categories.length - 1 }}>
+          <h3 class="text-charm-accent font-mono text-sm font-semibold tracking-wide mb-4">
+            <span class="text-charm-muted-soft">$ </span>{cat.name}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {cat.items.map((item) => (
+              <span class="skill-tag bg-charm-surface border border-charm-border/60 px-3 py-1.5 text-sm text-charm-muted rounded hover:bg-charm-surface-strong hover:text-charm-text hover:border-charm-accent/40 hover:scale-105 transition-all duration-200 cursor-default">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>
