@@ -51,10 +51,6 @@ Hackathon — "A World Away: Hunting for Exoplanets with AI". ML aplicado a dato
 
 `Python` `ML` `NASA` `Hackathon`
 
-### ⚙️ [n8n-exporter](https://github.com/whoAngeel/n8n-exporter)
-CLI exportador de workflows de n8n escrito en Go usando el framework Charm.
-
-`Go` `CLI` `n8n` `Charm`
 
 ### 📦 [wms-lite](https://github.com/whoAngeel/wms-lite)
 Sistema de gestión de inventario (WMS) backend en Go. API REST para manejo de almacenes y productos.
