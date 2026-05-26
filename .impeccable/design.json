@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-18T00:00:00.000Z",
+  "title": "Design System: whoAngeel Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Púrpura Técnico", "canonical": "oklch(56% 0.25 300)", "tonalRamp": ["oklch(15% 0.25 300)", "oklch(25% 0.25 300)", "oklch(35% 0.25 300)", "oklch(45% 0.25 300)", "oklch(56% 0.25 300)", "oklch(68% 0.25 300)", "oklch(80% 0.25 300)", "oklch(92% 0.25 300)"] },
+      "primary-strong": { "role": "primary", "displayName": "Púrpura Fuerte", "canonical": "oklch(48% 0.22 295)", "tonalRamp": ["oklch(15% 0.22 295)", "oklch(25% 0.22 295)", "oklch(35% 0.22 295)", "oklch(42% 0.22 295)", "oklch(48% 0.22 295)", "oklch(60% 0.22 295)", "oklch(75% 0.22 295)", "oklch(90% 0.22 295)"] },
+      "primary-soft": { "role": "primary", "displayName": "Púrpura Suave", "canonical": "oklch(68% 0.18 295)", "tonalRamp": ["oklch(20% 0.18 295)", "oklch(30% 0.18 295)", "oklch(40% 0.18 295)", "oklch(50% 0.18 295)", "oklch(60% 0.18 295)", "oklch(68% 0.18 295)", "oklch(80% 0.18 295)", "oklch(92% 0.18 295)"] },
+      "bg": { "role": "neutral", "displayName": "Fondo", "canonical": "oklch(5% 0.005 300)", "tonalRamp": ["oklch(2% 0.005 300)", "oklch(5% 0.005 300)", "oklch(10% 0.005 300)", "oklch(15% 0.005 300)", "oklch(20% 0.005 300)", "oklch(30% 0.005 300)", "oklch(50% 0.005 300)", "oklch(80% 0.005 300)"] },
+      "surface": { "role": "neutral", "displayName": "Superficie", "canonical": "oklch(8% 0.005 300)", "tonalRamp": ["oklch(3% 0.005 300)", "oklch(6% 0.005 300)", "oklch(8% 0.005 300)", "oklch(12% 0.005 300)", "oklch(15% 0.005 300)", "oklch(20% 0.005 300)", "oklch(40% 0.005 300)", "oklch(70% 0.005 300)"] },
+      "text": { "role": "neutral", "displayName": "Texto", "canonical": "oklch(90% 0.01 300)", "tonalRamp": ["oklch(30% 0.01 300)", "oklch(45% 0.01 300)", "oklch(60% 0.01 300)", "oklch(75% 0.01 300)", "oklch(85% 0.01 300)", "oklch(90% 0.01 300)", "oklch(93% 0.01 300)", "oklch(96% 0.01 300)"] },
+      "muted": { "role": "neutral", "displayName": "Texto Apagado", "canonical": "oklch(65% 0.02 260)", "tonalRamp": ["oklch(25% 0.02 260)", "oklch(35% 0.02 260)", "oklch(45% 0.02 260)", "oklch(55% 0.02 260)", "oklch(65% 0.02 260)", "oklch(75% 0.02 260)", "oklch(85% 0.02 260)", "oklch(93% 0.02 260)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero name en la home. Uso exclusivo." },
+      "heading": { "displayName": "Heading", "purpose": "Títulos de página (h1). Límite 65ch." },
+      "subheading": { "displayName": "Subheading", "purpose": "Títulos de sección (h2), tarjetas." },
+      "body": { "displayName": "Body", "purpose": "Texto corriente. Límite 65ch." },
+      "small": { "displayName": "Small", "purpose": "Metadatos, navegación, secundario." },
+      "caption": { "displayName": "Caption", "purpose": "Notas al pie, baja prioridad." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Easing por defecto para transiciones de estado." },
+      { "name": "duration-standard", "value": "200ms", "purpose": "Duración por defecto para transiciones." }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA button con acento púrpura. Uso escaso y significativo.",
+      "html": "<button class=\"ds-btn-primary\">DESCARGAR CV</button>",
+      "css": ".ds-btn-primary { background: #7c3aed; color: #e6e9ef; padding: 4px 16px; border: none; border-radius: 0; cursor: pointer; font-family: inherit; font-size: 0.875rem; font-weight: 500; transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #6d28d9; } .ds-btn-primary:focus-visible { outline: 2px solid #9d79f3; outline-offset: 2px; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "link",
+      "refersTo": "nav-link",
+      "description": "Link de navegación del header. Muted por defecto, primary en hover.",
+      "html": "<a href=\"/\" class=\"ds-nav-link\">Proyectos</a>",
+      "css": ".ds-nav-link { color: #94a3b8; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav-link:hover { color: #7c3aed; }"
+    },
+    {
+      "name": "Terminal Screen",
+      "kind": "custom",
+      "refersTo": "terminal-screen",
+      "description": "Fondo CRT con pixel grid, scanlines y viñeta. Identidad visual del portafolio.",
+      "html": "<div class=\"ds-terminal\"></div>",
+      "css": ".ds-terminal { position: fixed; inset: 0; z-index: 1000; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px), radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Terminal del Artesano",
+    "overview": "Un portafolio que se presenta como una interfaz de terminal de código — precisa, oscura, técnica. Cada elemento visual comunica que está hecho por un desarrollador que cuida los detalles. La pantalla de píxeles CRT no es decorativa: es la identidad misma, el código como medio de expresión. El diseño es minimalista funcional. Nada sobra. Rechaza explícitamente el look de template de portafolio comprado, los gradients genéricos, el glassmorphism y cualquier adorno que no aporte significado.",
+    "keyCharacteristics": [
+      "Oscuro con acento púrpura técnico",
+      "Fondo de terminal CRT (pixel grid + scanlines + viñeta)",
+      "Sin sombras ni elevación artificial",
+      "Tipografía de sistema (sin fuentes custom)",
+      "Español como lengua del contenido"
+    ],
+    "rules": [
+      { "name": "La Regla del Acento Único", "body": "El púrpura aparece en ≤10% de cualquier pantalla. Su rareza es lo que le da poder.", "section": "colors" },
+      { "name": "La Regla de la Superficie Plana", "body": "Sin sombras. La profundidad se construye exclusivamente por capas tonales.", "section": "colors" },
+      { "name": "La Regla de la Precisión Geométrica", "body": "Onest es una sola familia con rango completo de pesos. No se necesitan fuentes satélite. 1.25 de ratio constante.", "section": "typography" },
+      { "name": "La Regla del Plano por Defecto", "body": "Las superficies son planas en reposo. Sin sombras, sin blurs, sin elevación fingida.", "section": "elevation" }
+    ],
+    "dos": [
+      "Usar el púrpura como único acento cromático, en ≤10% de la superficie.",
+      "Construir jerarquía por capas tonales (bg → surface → surface-strong).",
+      "Mantener el fondo de terminal CRT como identidad visual.",
+      "Usar tipografía del sistema (system-ui stack).",
+      "Mantener el minimalismo funcional: cada elemento tiene un propósito."
+    ],
+    "donts": [
+      "Usar gradients, glassmorphism, o decoración sin propósito.",
+      "Usar más de 2 familias tipográficas.",
+      "Usar sombras ni box-shadow (usar capas tonales en su lugar).",
+      "Crear un look de template de portafolio comprado.",
+      "Usar más de un color acento.",
+      "Usar cards idénticas con icono + heading + texto repetidas.",
+      "Usar border-left mayor a 1px como stripe decorativo.",
+      "Usar gradient text (background-clip: text)."
+    ]
+  }
+}
