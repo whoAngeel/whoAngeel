@@ -1,0 +1,55 @@
+---
+/**
+ * ProjectBody — textual part of a project (award, tags, title, description,
+ * stack, links). Shared by the grid cards and the swap view's detail panel
+ * so both views always show the same content.
+ */
+import type { Project } from "../data/projects";
+import { getLocale, localize, useTranslations } from "../i18n";
+
+interface Props {
+  project: Project;
+  /** Unique id for the heading (used by aria-labelledby). */
+  headingId: string;
+  class?: string;
+}
+
+const { project: p, headingId, class: className } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const name = localize(p.name, locale);
+---
+
+<div class:list={["flex flex-col gap-3", className]}>
+  <div class="flex flex-wrap items-center gap-2">
+    {p.award && <span class="tui-badge">★ {t.projects.award[p.award.kind]}</span>}
+    {p.tags.map((tag) => <span class="font-mono text-xs text-charm-muted-soft">#{t.projects.tags[tag] ?? tag}</span>)}
+  </div>
+
+  <h3 id={headingId} class="font-mono text-xl md:text-2xl font-semibold text-charm-text leading-snug">
+    {name}
+  </h3>
+
+  {p.award && <p class="font-mono text-xs text-charm-accent-text">{p.award.event}</p>}
+
+  <p class="text-sm md:text-[0.95rem] text-charm-muted leading-relaxed">{localize(p.detail, locale)}</p>
+
+  <ul class="flex flex-wrap gap-1.5 mt-1" aria-label={t.a11y.stack}>
+    {p.stack.map((s) => <li class="tui-chip">{s}</li>)}
+  </ul>
+
+  {(p.code || p.demo) && (
+    <div class="project-links mt-auto pt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-dashed border-charm-border font-mono text-sm">
+      {p.demo && (
+        <a href={p.demo} target="_blank" rel="noopener noreferrer" class="no-underline">
+          {t.projects.demo} ↗<span class="sr-only"> {t.projects.of(name)} {t.a11y.opensNewTab}</span>
+        </a>
+      )}
+      {p.code && (
+        <a href={p.code} target="_blank" rel="noopener noreferrer" class="no-underline">
+          {t.projects.code} ↗<span class="sr-only"> {t.projects.of(name)} {t.a11y.opensNewTab}</span>
+        </a>
+      )}
+    </div>
+  )}
+</div>

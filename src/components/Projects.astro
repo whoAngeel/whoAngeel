@@ -1,427 +1,623 @@
-
 ---
-const raw = [
-  {
-    order: 10,
-    name: "Plataforma de Orquestación de Pagos Interoperables",
-    images: ["/projects/hackathon_interledger_2025.png", "/projects/hackathon_interledger_2025_2.png"],
-    badges: ["GCP", "OpenPayments SDK", "Express.js", "Firestore", "Redis", "Docker"],
-    tags: ["#ganador", "#interledger"],
-    winner: "🏆 GANADOR — Interledger Hackathon 2025",
-    detail: "API en Node.js que actúa como motor de pagos interoperables utilizando el protocolo Interledger y Open Payments. Ganadora del 1er lugar en el Interledger Hackathon 2025, con arquitectura desacoplada, seguridad GNAP y flujo automatizado de split payments, desplegado en Google Cloud Run.",
-    code: "https://github.com/whoAngeel/interledger-hackathon-2025"
-  },
-  {
-    order: 15,
-    name: "FundUP — Crowdfunding con Open Payments",
-    images: ["/projects/fundup/image1.png", "/projects/fundup/image2.png", "/projects/fundup/image3.png"],
-    badges: ["NestJS", "TypeScript", "MongoDB", "Redis", "Docker", "Open Payments"],
-    tags: ["#ganador", "#openpayments", "#hackathon"],
-    winner: "🏆 GANADOR — Open Payments Hackathon",
-    detail: "Backend en NestJS para plataforma de crowdfunding con pagos vía Open Payments e Interledger. Arquitectura modular con MongoDB, Redis, autenticación JWT y webhooks. Despliegue con Docker.",
-    code: "https://github.com/whoAngeel/fundup-backend"
-  },
-  {
-    order: 18,
-    name: "Interledger Tourism — Open Payments",
-    hidden: true,
-    images: undefined,
-    badges: ["Node.js", "Express", "Open Payments", "Firestore", "Redis", "GCP", "Docker"],
-    tags: ["#ganador", "#interledger"],
-    winner: "🏆 GANADOR — Interledger Hackathon 2025",
-    detail: "Payment orchestration platform for sustainable tourism with Interledger Protocol y Open Payments. Split payments, P2P transfers, GNAP authorization, despliegue en GCP Cloud Run.",
-    code: "https://github.com/whoAngeel/interledger-hackathon-2025"
-  },
-  {
-    order: 20,
-    name: "Crowdfunding para Desastres Naturales",
-    images: undefined,
-    hidden: true,
-    badges: ["Blockchain", "Web3", "Python"],
-    tags: ["#ganador", "#blockchain"],
-    winner: "🏆 GANADOR — Interledger Foundation",
-    detail: "Hackathon local → nacional/internacional con todo pagado. Ganamos porque resolvíamos problemas reales, no solo implementábamos la tecnología que la fundación quería."
-  },
-  {
-    order: 30,
-    name: "Exoplanets with AI",
-    images: undefined,
-    badges: ["Python", "Machine Learning", "NASA", "Cloud Functions", "GCP"],
-    tags: ["#top", "#nasa"],
-    winner: "🌍 TOP NACIONAL — NASA Space Apps Challenge 2025",
-    detail: "plicación web interactiva diseñada para democratizar el estudio de exoplanetas mediante Inteligencia Artificial, desarrollada como proyecto destacado en la etapa nacional del hackathon de la NASA. La herramienta unifica datos públicos de misiones espaciales y utiliza modelos predictivos para evaluar y visualizar las características y el análisis de habitabilidad de mundos distantes en tiempo real.",
-    code: "https://github.com/whoAngeel/exoplanets-with-ai"
-  },
-  {
-    order: 22,
-    name: "Monitoreo de Vuelos CDMX",
-    images: [
-      "/projects/flight-monitor/image.png", 
-      "/projects/flight-monitor/image2.png",
-      "/projects/flight-monitor/image-3.png"
-    ],
-    badges: ["Python", "API", "React", "WebSockets", "snowflake"],
-    tags: ["#ganador", "#hackathon"],
-    winner: "🏆 GANADOR — Hackathon ITIZ 2025",
-    detail: "Aplicación web diseñada para centralizar, rastrear y administrar el flujo de operaciones aéreas en el espacio metropolitano de la Ciudad de México en tiempo real. La plataforma captura los datos de los vuelos, procesa sus itinerarios y los proyecta de forma inmediata en un panel de control interactivo, permitiendo a los usuarios supervisar despegues, aterrizajes y estados de las aeronaves.",
-    code: "https://github.com/whoAngeel/flight-monitor-backend"
-  },
-  {
-    order: 50,
-    name: "Blockchain para Impacto Social",
-    images: undefined,
-    hidden: true,
-    badges: ["Blockchain", "Solidity", "Web3"],
-    tags: ["#ganador", "#blockchain"],
-    winner: "🏆 GANADOR — Múltiples Hackathones",
-    detail: "Soluciones con blockchain que ganaron en varios hackathones."
-  },
-  
-  {
-    order: 1,
-    name: "RAGO",
-    coverTitle: true,
-    images: [
-      "/projects/rago/image.png",
-      "/projects/rago/image-copy.png",
-      "/projects/rago/image-3.png",
-      "/projects/rago/image-4.png",
-    ],
-    badges: ["Go", "RAG", "PostgreSQL", "Qdrant", "LangChain", "React", "JWT"],
-    tags: ["#personal"],
-    detail: "Sistema de Recuperación Aumentada por Generación (RAG) diseñado para la gestión y consulta inteligente de documentos. Permite a usuarios autenticados subir archivos y organizarlos en colecciones indexadas, generando salas de chat dinámicas basadas en esos documentos para que usuarios externos y sin autenticación puedan realizar consultas y conversar directamente con la información.",
-    code: "https://github.com/whoAngeel/rago",
-    demo: "https://rago.whoangel.work"
-  },
-  {
-    order: 3,
-    name: "Oaxaca Artisan",
-    coverTitle: true,
-    images: [
-      "/projects/split-payments/image.png",
-      "/projects/split-payments/image-2.png",
-      "/projects/split-payments/image-3.png",
-    ],
-    badges: ["Go", "Flutter", "PostgreSQL", "Docker", "Open Payments", "WebSockets"],
-    tags: ["#personal", "#interledger"],
-    detail: "Plataforma de pagos divididos sobre el protocolo Open Payments de Interledger. Arquitectura de microservicios: Splitter API (motor genérico de split payments con GNAP + ILP), Gallery API (dominio de negocio para galerías y artesanos de Oaxaca) y app Flutter para compradores, con confirmación de pagos en tiempo real vía WebSocket.",
-    code: "https://github.com/whoAngeel/split-payments"
-  },
-  {
-    order: 2,
-    name: "Senda",
-    images: undefined,
-    badges: ["Go", "Gin", "MongoDB", "MinIO", "Redis", "Ollama", "WebSockets"],
-    tags: ["#personal", "#wip"],
-    detail: "Extractor de documentos en Go que procesa PDFs localmente usando LLMs a través de Ollama. Implementa Content-Addressable Storage (SHA-256 + MinIO) para evitar duplicados, MongoDB para persistencia, cola con Redis para procesamiento asíncrono y actualizaciones en tiempo real vía WebSockets.",
-    code: "https://github.com/whoAngeel/senda"
-  },
-  {
-    order: 27,
-    name: "n8n-exporter",
-    images: ["/projects/n8n-exporter/image-copy.png","/projects/n8n-exporter/image-copy-2.png", ],
-    badges: ["Go", "Charm CLI", "TUI"],
-    tags: ["#personal"],
-    detail: "Herramienta diseñada para simplificar la exportación de workflows en n8n. Automatiza la limpieza de los flujos y elimina datos basura o temporales."
-  },
-  {
-    order: 28,
-    name: "SECI",
-    images: [
-      "/projects/seci/image.png",
-      "/projects/seci/image-copy.png",
-    ],
-    badges: ["Flutter", "HIVE"],
-    tags: ["#personal", "#escolar"],
-    detail: "Sistema de Entradas para el Centro de Información. Contabilizaba las entradas a la biblioteca universitaria categorizando por carrera. Antes lo hacían manualmente con Excel.",
-    code: "https://github.com/whoAngeel/seci-desktop-offline"
-  }
-];
+/**
+ * Projects — two views behind a TUI tab switch:
+ *
+ *   [ swap ]  (default) detail panel + animated 3D card stack
+ *             (src/scripts/card-swap.ts, port of React Bits CardSwap)
+ *   [ grid ]  every project as a Lipgloss frame card
+ *
+ * The chosen view is stored in localStorage and applied before first paint
+ * by the inline script in Layout.astro (`html[data-projects-view]`), so
+ * there is no flash. Without JS only the grid is shown.
+ *
+ * Data: src/data/projects.ts.
+ */
+import Frame from "./Frame.astro";
+import SectionHeader from "./SectionHeader.astro";
+import ProjectBody from "./ProjectBody.astro";
+import { projects } from "../data/projects";
+import { getLocale, localize, shell, useTranslations } from "../i18n";
 
-const projects = [...raw]
-  .filter((p) => !p.hidden)
-  .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const nameOf = (p: (typeof projects)[number]) => localize(p.name, locale);
 
-const base = import.meta.env.BASE_URL;
+// BASE_URL has no trailing slash in this config ("/whoAngeel").
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pad = (n: number) => String(n).padStart(2, "0");
+const total = pad(projects.length);
 ---
 
-<section id="proyectos" class="max-w-5xl mx-auto w-full px-8 py-24">
-  <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Proyectos</h2>
+<section id="proyectos" class="section">
+  <SectionHeader
+    title={t.sections.projects.title}
+    path={shell.paths.projects}
+    meta={t.sections.items(total)}
+    lead={t.sections.projects.lead}
+  />
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {
-      projects.map((p, i) => (
-        <article
-          class="project-card bg-charm-surface border border-charm-border border-t-2 border-t-charm-accent/10 rounded overflow-hidden group cursor-default"
-          data-index={i}
-        >
-          <div class="project-img h-40 md:h-52 bg-charm-surface-strong border-b border-charm-border flex items-center justify-center text-charm-muted-soft text-xs select-none overflow-hidden relative">
-            {p.images && p.images.length > 0 ? (
-              <div class="relative w-full h-full" data-carousel={i}>
-                {p.coverTitle && (
-                  <div class="project-cover-text absolute inset-0 z-20 flex flex-col items-center justify-center gap-2 bg-charm-surface-strong pointer-events-none">
-                    <span class="project-cover-name">{p.name}</span>
-                  </div>
-                )}
-                {p.images.map((img, j) => (
-                  <img
-                    src={base + img}
-                    alt={`${p.name} - ${j + 1}`}
-                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
-                    class:list={j === 0 ? "opacity-100" : "opacity-0"}
-                    data-img={j}
-                  />
-                ))}
-                {p.images.length > 1 && (
-                  <div class="carousel-nav absolute inset-0 z-10">
-                    <div class="absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex items-center justify-start pl-2 cursor-pointer carousel-zone" data-nav="prev" role="button" tabindex="0" aria-label="Anterior">
-                      <span class="carousel-arrow flex items-center justify-center w-8 h-8 rounded-full bg-black/60 text-charm-accent font-mono text-xl font-bold hover:bg-black/80 transition-colors">&lt;</span>
-                    </div>
-                    <div class="absolute inset-y-0 right-0 w-2/5 bg-gradient-to-l from-black/70 via-black/30 to-transparent flex items-center justify-end pr-2 cursor-pointer carousel-zone" data-nav="next" role="button" tabindex="0" aria-label="Siguiente">
-                      <span class="carousel-arrow flex items-center justify-center w-8 h-8 rounded-full bg-black/60 text-charm-accent font-mono text-xl font-bold hover:bg-black/80 transition-colors">&gt;</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : p.code ? (
-              <a
-                href={p.code}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="project-cover-default group/cover"
-                aria-label={`${p.name} en GitHub`}
-              >
-                <span class="project-cover-name">{p.name}</span>
-                <svg class="project-cover-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                  <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.22.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
-                </svg>
-              </a>
-            ) : (
-              <div class="project-cover-default">
-                <span class="project-cover-name">{p.name}</span>
-              </div>
-            )}
-            {p.tags && p.tags.length > 0 && (
-              <div class="tags-overlay absolute bottom-1.5 left-1.5 flex flex-wrap gap-1 z-10">
-                {p.tags.map(tag => (
-                  <span class="bg-charm-bg/85 backdrop-blur-sm text-charm-accent text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded leading-none shadow-sm">{tag}</span>
-                ))}
-              </div>
-            )}
-          </div>
+  <!-- Toolbar: view switch (left) + swap controls (right) -->
+  <div class="view-toolbar mb-8 flex flex-wrap items-center justify-between gap-3 font-mono text-xs sm:text-sm">
+    <div class="flex items-center gap-2">
+      <span class="text-charm-muted-soft" aria-hidden="true">{t.projects.view}</span>
+      <div role="tablist" aria-label={t.projects.viewsLabel} class="view-tabs">
+        <button type="button" role="tab" id="tab-swap" aria-controls="projects-swap" data-view-tab="swap" class="view-tab">swap</button>
+        <button type="button" role="tab" id="tab-grid" aria-controls="projects-grid" data-view-tab="grid" class="view-tab">grid</button>
+      </div>
+    </div>
 
-          <div class="px-5 py-4">
-            <h3 class="text-xl md:text-2xl font-semibold text-charm-text">{p.name}</h3>
+    <div class="swap-controls flex items-center">
+      <button type="button" class="swap-btn" data-swap="prev" aria-label={t.projects.prev}>‹</button>
+      <button type="button" class="swap-btn swap-btn--wide" data-swap="toggle" aria-pressed="false"
+        aria-label={t.projects.pause} data-label-pause={t.projects.pause} data-label-resume={t.projects.resume}>
+        <span data-swap-icon aria-hidden="true">||</span>
+      </button>
+      <button type="button" class="swap-btn" data-swap="next" aria-label={t.projects.next}>›</button>
+      <span class="swap-count" aria-hidden="true"><span data-swap-current>01</span>/{total}</span>
+    </div>
+  </div>
 
-            <div class="flex flex-wrap gap-1.5 mt-2">
-              {p.badges.map(badge => (
-                <span class="project-badge bg-charm-surface-strong border border-charm-border/60 px-2 py-0.5 text-xs text-charm-muted rounded">{badge}</span>
-              ))}
+  <!-- ─────────────────────────── Swap view ─────────────────────────── -->
+  <div id="projects-swap" role="tabpanel" aria-labelledby="tab-swap" class="swap-view" data-swap-root>
+    <div class="swap-layout">
+      <!-- Detail of the card in front. Only the active panel is visible. -->
+      <!-- aria-live is "off" during autoplay and "polite" for manual navigation. -->
+      <div class="swap-panels" aria-live="off">
+        {projects.map((p, i) => (
+          <Frame
+            as="article"
+            class="swap-panel h-full flex flex-col"
+            data-swap-panel={i}
+            data-project-id={p.id}
+            hidden={i !== 0}
+            aria-labelledby={`swap-${p.id}-title`}
+          >
+            <Fragment slot="title">
+              <span class="text-charm-accent-text">{pad(i + 1)}</span> ─ {p.id}
+            </Fragment>
+            <ProjectBody project={p} headingId={`swap-${p.id}-title`} class="flex-1 px-5 pt-6 pb-5" />
+          </Frame>
+        ))}
+      </div>
+
+      <!-- Visual stack. Decorative duplicate of the panels → aria-hidden;
+           keyboard users drive it with the toolbar buttons. -->
+      <div class="swap-stage" data-swap-stage aria-hidden="true">
+        {projects.map((p, i) => (
+          <div class="swap-card" data-swap-card={i} title={nameOf(p)}>
+            <div class="swap-card-bar">
+              <span class="text-charm-accent-text">{pad(i + 1)}</span>
+              <span class="truncate">{nameOf(p)}</span>
+              {p.award && <span class="ml-auto text-charm-accent-text">★</span>}
             </div>
-
-            <div class="project-details overflow-hidden mt-0" style="max-height: 0; opacity: 0;">
-              {p.winner && (
-                <p class="text-charm-accent text-xs tracking-wide font-semibold mt-3 leading-relaxed">{p.winner}</p>
-              )}
-              <p class="text-sm md:text-base text-charm-muted mt-2 leading-relaxed">{p.detail}</p>
-              {(p.code || p.demo) && (
-                <div class="flex gap-3 mt-3">
-                  {p.demo && (
-                    <a href={p.demo} target="_blank" rel="noopener noreferrer" class="text-sm text-charm-accent hover:text-charm-accent-strong font-medium transition-colors">Demo →</a>
-                  )}
-                  {p.code && (
-                    <a href={p.code} target="_blank" rel="noopener noreferrer" class="text-sm text-charm-accent hover:text-charm-accent-strong font-medium transition-colors">Codigo →</a>
-                  )}
+            <div class="swap-card-media">
+              {p.images?.length ? (
+                <img
+                  src={base + p.images[0]}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  class:list={{ "is-contain": p.imageFit === "contain" }}
+                />
+              ) : (
+                <div class="project-placeholder">
+                  <span class="text-charm-muted-soft">$ tree ./{p.id}</span>
+                  <span class="project-placeholder-name">{nameOf(p)}</span>
                 </div>
               )}
             </div>
           </div>
-        </article>
-      ))
-    }
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────── Grid view ─────────────────────────── -->
+  <div id="projects-grid" role="tabpanel" aria-labelledby="tab-grid" class="grid-view grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10">
+    {projects.map((p, i) => (
+      <Frame
+        as="article"
+        id={`proyecto-${p.id}`}
+        class:list={["project-card flex flex-col", { "project-card--featured md:col-span-2": p.featured }]}
+        aria-labelledby={`proyecto-${p.id}-title`}
+      >
+        <Fragment slot="title">
+          <span class="text-charm-accent-text">{pad(i + 1)}</span> ─ {p.id}
+        </Fragment>
+
+        <div class="project-media">
+          {p.images?.length ? (
+            <div class="carousel" data-carousel>
+              {p.images.map((img, j) => (
+                <img
+                  src={base + img}
+                  alt={t.projects.screenshotAlt(nameOf(p), j + 1, p.images!.length)}
+                  loading="lazy"
+                  decoding="async"
+                  class:list={["carousel-img", { "is-active": j === 0, "is-contain": p.imageFit === "contain" }]}
+                  data-slide={j}
+                  aria-hidden={j === 0 ? undefined : "true"}
+                />
+              ))}
+              {p.images.length > 1 && (
+                <div class="carousel-controls">
+                  <button type="button" class="carousel-btn" data-dir="-1" aria-label={t.projects.prevShot(nameOf(p))}>‹</button>
+                  <span class="carousel-count" aria-live="polite">
+                    <span data-current>1</span>/{p.images.length}
+                  </span>
+                  <button type="button" class="carousel-btn" data-dir="1" aria-label={t.projects.nextShot(nameOf(p))}>›</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div class="project-placeholder" aria-hidden="true">
+              <span class="text-charm-muted-soft">$ tree ./{p.id}</span>
+              <span class="project-placeholder-name">{nameOf(p)}</span>
+              <span class="text-charm-muted-soft">{t.projects.noScreenshots}</span>
+            </div>
+          )}
+        </div>
+
+        <ProjectBody project={p} headingId={`proyecto-${p.id}-title`} class="flex-1 px-5 pt-4 pb-5" />
+      </Frame>
+    ))}
   </div>
 </section>
 
-<style is:global>
-  .project-cover-default {
+<style>
+  /* ── View switching (state lives on <html>, see Layout.astro) ─────── */
+  :global(html:not(.js)) .view-toolbar,
+  :global(html:not(.js)) .swap-view,
+  :global(html.js:not([data-projects-view="grid"])) .grid-view,
+  :global(html.js[data-projects-view="grid"]) .swap-view,
+  :global(html.js[data-projects-view="grid"]) .swap-controls {
+    display: none;
+  }
+
+  /* ── Toolbar ──────────────────────────────────────────────────────── */
+  .view-tabs {
+    display: inline-flex;
+    border: 1px solid var(--charm-border-soft);
+    border-radius: 2px;
+  }
+
+  .view-tab {
+    padding: 0.25rem 0.75rem;
+    color: var(--charm-muted);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  }
+  .view-tab + .view-tab {
+    border-left: 1px solid var(--charm-border-soft);
+  }
+  .view-tab::before { content: "[ "; color: var(--charm-muted-soft); }
+  .view-tab::after { content: " ]"; color: var(--charm-muted-soft); }
+  .view-tab:hover {
+    color: var(--charm-text);
+  }
+  .view-tab[aria-selected="true"] {
+    color: var(--charm-bg);
+    background: var(--charm-accent-soft);
+    font-weight: 600;
+  }
+  .view-tab[aria-selected="true"]::before,
+  .view-tab[aria-selected="true"]::after {
+    color: inherit;
+  }
+
+  .swap-controls {
+    border: 1px solid var(--charm-border-soft);
+    border-radius: 2px;
+  }
+
+  .swap-btn {
+    display: grid;
+    place-items: center;
+    min-width: 2.25rem;
+    height: 2rem;
+    padding-inline: 0.5rem;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--charm-accent-text);
+    background: transparent;
+    border: 0;
+    border-right: 1px solid var(--charm-border);
+    cursor: pointer;
+  }
+  .swap-btn--wide {
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .swap-btn:hover {
+    color: var(--charm-text);
+    background: rgba(124, 58, 237, 0.2);
+  }
+
+  .swap-count {
+    padding-inline: 0.75rem;
+    color: var(--charm-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Swap view ────────────────────────────────────────────────────── */
+  .swap-layout {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .swap-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      align-items: stretch;
+    }
+  }
+
+  /* Stage first on mobile so the motion is visible above the fold. */
+  .swap-stage {
+    order: -1;
+    position: relative;
+    height: clamp(17rem, 62vw, 27rem);
+    overflow: hidden;
+    perspective: 900px;
+  }
+
+  @media (min-width: 900px) {
+    .swap-stage {
+      order: 0;
+      height: auto;
+      min-height: 27rem;
+    }
+  }
+
+  .swap-panels {
+    min-width: 0;
+  }
+
+  /* Card geometry. Translation/skew are applied by GSAP (xPercent -50). */
+  .swap-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: flex;
     flex-direction: column;
+    width: min(25rem, 70%);
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    background: var(--charm-surface);
+    border: 1px solid var(--charm-border-soft);
+    border-radius: 6px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .swap-card-bar {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    padding: 0.45rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--charm-text);
+    background: var(--charm-surface-strong);
+    border-bottom: 1px solid var(--charm-border);
+  }
+
+  .swap-card-media {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    background: var(--charm-surface-strong);
+  }
+  .swap-card-media img {
     width: 100%;
     height: 100%;
-    padding: 0 1.5rem;
-    text-align: center;
-    text-decoration: none;
+    object-fit: cover;
+    object-position: top center;
   }
 
-  .project-cover-name {
-    font-family: "Onest", system-ui, sans-serif;
-    font-weight: 600;
-    font-size: clamp(1.05rem, 1.6vw + 0.6rem, 1.375rem);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--charm-text);
-    transition: color 0.25s ease;
+  /* Before JS positions the cards, keep them stacked & centred. */
+  :global(html.js) .swap-card:not([style]) {
+    transform: translate(-50%, -50%);
   }
 
-  .project-cover-icon {
-    color: var(--charm-muted-soft);
-    transition: color 0.25s ease;
+  /* ── Grid view ────────────────────────────────────────────────────── */
+  .project-card {
+    transition: border-color 0.2s var(--ease-out);
+  }
+  .project-card:hover,
+  .project-card:focus-within,
+  .project-card:target {
+    border-color: var(--charm-accent-soft);
   }
 
-  .project-cover-text {
-    padding: 0 1.5rem;
-    text-align: center;
-    opacity: 1;
-    transition: opacity 0.3s ease;
+  .project-media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 0.5rem 0.5rem 0;
+    overflow: hidden;
+    background: var(--charm-surface-strong);
+    border: 1px solid var(--charm-border);
+    border-radius: 3px;
   }
 
-  .project-card:hover .project-cover-text {
+  /* Featured: media and body side by side on wide screens. */
+  @media (min-width: 768px) {
+    .project-card--featured {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      align-items: stretch;
+    }
+    .project-card--featured .project-media {
+      aspect-ratio: auto;
+      min-height: 20rem;
+      margin: 0.5rem 0 0.5rem 0.5rem;
+    }
+  }
+
+  .carousel,
+  .carousel-img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
     opacity: 0;
+    transition: opacity 0.3s var(--ease-out);
+  }
+  .carousel-img.is-active {
+    opacity: 1;
   }
 
-  .project-card:hover .project-cover-name {
-    color: var(--charm-accent-soft);
+  /* Portrait (phone) screenshots: show the whole screen, letterboxed. */
+  .carousel-img.is-contain,
+  .swap-card-media img.is-contain {
+    object-fit: contain;
+    object-position: center;
+    padding-block: 0.5rem;
   }
 
-  .project-card:hover .project-cover-icon {
-    color: var(--charm-accent);
+  /* Status-line style controls docked bottom-right. */
+  .carousel-controls {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--charm-text);
+    background: rgba(9, 9, 13, 0.9);
+    border: 1px solid var(--charm-border-soft);
+    border-radius: 2px;
   }
 
-  .carousel-arrow {
-    transition: opacity 0.2s, background 0.2s;
+  .carousel-btn {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 1.75rem;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--charm-accent-text);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .carousel-btn:hover {
+    color: var(--charm-text);
+    background: rgba(124, 58, 237, 0.25);
   }
 
-  .carousel-zone {
-    transition: opacity 0.2s;
+  .carousel-count {
+    min-width: 2.5rem;
+    padding-inline: 0.25rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    border-inline: 1px solid var(--charm-border);
   }
 
-  .tags-overlay {
-    transition: opacity 0.2s;
+  /* Shared by grid media and swap cards. */
+  .project-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1.25rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    /* Dot matrix hint so empty media still reads as "screen". */
+    background-image: radial-gradient(var(--charm-border) 1px, transparent 1px);
+    background-size: var(--cell-w) var(--cell-h);
   }
 
-  @media (hover: hover) {
-    .carousel-arrow,
-    .carousel-zone {
-      opacity: 0;
-    }
-    .group:hover .carousel-arrow,
-    .group:hover .carousel-zone {
-      opacity: 1;
-    }
-    .group:hover .tags-overlay {
-      opacity: 0;
-    }
-  }
-
-  @media (hover: none) {
-    .carousel-arrow,
-    .carousel-zone {
-      opacity: 1;
-    }
-    .tags-overlay {
-      opacity: 1;
-    }
+  .project-placeholder-name {
+    font-size: clamp(1.1rem, 2vw + 0.5rem, 1.5rem);
+    font-weight: 700;
+    color: var(--charm-text);
   }
 </style>
 
 <script>
-  const cards = document.querySelectorAll(".project-card");
-  const isTouch = window.matchMedia("(hover: none)").matches;
-  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { CardSwap } from "../scripts/card-swap";
 
-  if (isTouch || isReduced) {
-    cards.forEach((card) => {
-      const details = card.querySelector(".project-details");
-      if (details) {
-        details.style.maxHeight = "none";
-        details.style.opacity = "1";
-        details.style.overflow = "visible";
+  type View = "swap" | "grid";
+  const STORAGE_KEY = "projects-view";
+  const root = document.documentElement;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pad = (n: number) => String(n).padStart(2, "0");
+
+  // ── Swap view ───────────────────────────────────────────────────────
+  const stage = document.querySelector<HTMLElement>("[data-swap-stage]");
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-swap-card]"));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>("[data-swap-panel]"));
+  const current = document.querySelector<HTMLElement>("[data-swap-current]");
+  const toggleBtn = document.querySelector<HTMLButtonElement>('[data-swap="toggle"]');
+  const toggleIcon = document.querySelector<HTMLElement>("[data-swap-icon]");
+
+  let swap: CardSwap | undefined;
+
+  const showPanel = (index: number) => {
+    panels.forEach((panel, i) => {
+      const active = i === index;
+      panel.hidden = !active;
+      if (active && !reduced) {
+        gsap.fromTo(panel, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
       }
     });
-  } else {
-      cards.forEach((card) => {
-        const details = card.querySelector(".project-details");
-        const img = card.querySelector(".project-img");
-        if (!details) return;
+    if (current) current.textContent = pad(index + 1);
+  };
 
-        const show = gsap.to(details, {
-          maxHeight: 300,
-          opacity: 1,
-          duration: 0.4,
-          ease: "power3.out",
-          paused: true,
-        });
+  /** Spacing scales with the rendered card so the stack fits any width. */
+  const fitStack = () => {
+    if (!swap || !cards[0]) return;
+    const { offsetWidth: w, offsetHeight: h } = cards[0];
+    if (w && h) swap.setDistances(Math.round(w * 0.11), Math.round(h * 0.13));
+  };
 
-        const lift = gsap.to(card, {
-          y: -5,
-          borderColor: "var(--charm-accent-soft)",
-          duration: 0.35,
-          ease: "power2.out",
-          paused: true,
-        });
+  const panelsWrap = document.querySelector<HTMLElement>(".swap-panels");
 
-        const imgReveal = img
-          ? gsap.to(img, {
-              filter: "brightness(1.1) contrast(1.05)",
-              duration: 0.35,
-              ease: "power2.out",
-              paused: true,
-            })
-          : null;
+  /** Announce panel changes only when the user is driving the stack. */
+  const setLive = (manual: boolean) => panelsWrap?.setAttribute("aria-live", manual ? "polite" : "off");
 
-        const topBorderTween = gsap.to(card, {
-          borderTopColor: "var(--charm-accent)",
-          duration: 0.35,
-          ease: "power2.out",
-          paused: true,
-        });
+  const updateToggle = () => {
+    if (!toggleBtn || !toggleIcon) return;
+    const stopped = reduced || toggleBtn.getAttribute("aria-pressed") === "true";
+    toggleIcon.textContent = stopped ? "▶\uFE0E" : "||"; // FE0E: text (not emoji) glyph
+    // Localized labels are rendered server-side as data attributes.
+    const label = stopped ? toggleBtn.dataset.labelResume : toggleBtn.dataset.labelPause;
+    if (label) toggleBtn.setAttribute("aria-label", label);
+    setLive(stopped);
+  };
 
-        card.addEventListener("mouseenter", () => {
-          show.play();
-          lift.play();
-          imgReveal?.play();
-          topBorderTween.play();
-        });
+  const manual = (action: () => void) => {
+    setLive(true);
+    action();
+  };
 
-        card.addEventListener("mouseleave", () => {
-          show.reverse();
-          lift.reverse();
-          imgReveal?.reverse();
-          topBorderTween.reverse();
-      });
+  if (stage && cards.length) {
+    swap = new CardSwap(stage, cards, {
+      delay: 5000,
+      pauseOnHover: true,
+      skewAmount: 5,
+      easing: "elastic",
+      maxVisible: 4,
+      // Respect reduced motion: no autoplay, the user steps manually.
+      autoplay: !reduced,
+      onFrontChange: showPanel,
     });
+
+    fitStack();
+    new ResizeObserver(fitStack).observe(stage);
+
+    // Clicking the stack advances it, like the original onCardClick.
+    stage.addEventListener("click", () => swap!.next());
+
+    document.querySelector('[data-swap="next"]')?.addEventListener("click", () => manual(() => swap!.next()));
+    document.querySelector('[data-swap="prev"]')?.addEventListener("click", () => manual(() => swap!.prev()));
+
+    toggleBtn?.addEventListener("click", () => {
+      if (reduced) {
+        manual(() => swap!.next());
+        return;
+      }
+      const pause = toggleBtn.getAttribute("aria-pressed") !== "true";
+      toggleBtn.setAttribute("aria-pressed", String(pause));
+      swap!.setPlaying(!pause);
+      updateToggle();
+    });
+
+    // Keyboard focus inside the panel pauses rotation (WCAG 2.2.2).
+    panelsWrap?.addEventListener("focusin", () => swap!.block("focus", true));
+    panelsWrap?.addEventListener("focusout", () => swap!.block("focus", false));
+
+    updateToggle();
   }
 
-  // Carousel — infinite loop cycling
-  const idxMap = new Map();
+  // ── View switch ─────────────────────────────────────────────────────
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-view-tab]"));
 
-  document.querySelectorAll("[data-carousel]").forEach((el) => {
-    idxMap.set(el, 0);
+  const setView = (view: View, persist = true) => {
+    root.dataset.projectsView = view;
+    tabs.forEach((tab) => {
+      const selected = tab.dataset.viewTab === view;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    swap?.block("view", view !== "swap");
+    if (view === "swap") fitStack();
+    if (persist) {
+      try {
+        localStorage.setItem(STORAGE_KEY, view);
+      } catch {
+        /* storage unavailable: preference just isn't remembered */
+      }
+    }
+    // Hidden → visible changes layout; recompute scroll-reveal positions.
+    ScrollTrigger.refresh();
+  };
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => setView(tab.dataset.viewTab as View));
+    // Arrow keys move between tabs (ARIA tabs pattern).
+    tab.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      const next = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+      next.focus();
+      setView(next.dataset.viewTab as View);
+    });
   });
 
-  document.querySelectorAll("[data-nav]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const container = btn.closest("[data-carousel]");
-      const imgs = container.querySelectorAll("[data-img]");
-      const total = imgs.length;
-      if (total < 2) return;
+  setView(root.dataset.projectsView === "grid" ? "grid" : "swap", false);
 
-      let curr = idxMap.get(container) || 0;
-      const dir = btn.dataset.nav;
-      const next = (((curr + (dir === "next" ? 1 : -1)) % total) + total) % total;
+  // Links like "#proyecto-rago" (from Logros) must work in either view.
+  const ids = panels.map((p) => p.dataset.projectId);
+  document.addEventListener("click", (e) => {
+    const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#proyecto-"]');
+    if (!link || root.dataset.projectsView === "grid" || !swap) return;
+    const index = ids.indexOf(link.hash.replace("#proyecto-", ""));
+    if (index < 0) return;
+    e.preventDefault();
+    swap.goTo(index);
+    document.getElementById("proyectos")?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+  });
 
-      imgs.forEach((img, j) => {
-        img.classList.toggle("opacity-100", j === next);
-        img.classList.toggle("opacity-0", j !== next);
+  // ── Grid carousels ──────────────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll<HTMLImageElement>("[data-slide]"));
+    const counter = carousel.querySelector<HTMLElement>("[data-current]");
+    if (slides.length < 2) return;
+    let index = 0;
+
+    const go = (dir: number) => {
+      index = (index + dir + slides.length) % slides.length;
+      slides.forEach((img, j) => {
+        const active = j === index;
+        img.classList.toggle("is-active", active);
+        img.toggleAttribute("aria-hidden", !active);
       });
+      if (counter) counter.textContent = String(index + 1);
+    };
 
-      idxMap.set(container, next);
+    carousel.querySelectorAll<HTMLButtonElement>("[data-dir]").forEach((btn) => {
+      btn.addEventListener("click", () => go(Number(btn.dataset.dir)));
+    });
+
+    carousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") go(-1);
+      else if (e.key === "ArrowRight") go(1);
     });
   });
 </script>

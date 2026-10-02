@@ -1,42 +1,76 @@
-<section id="contacto" class="max-w-5xl mx-auto w-full px-8 py-24">
-  <h2 class="section-title text-4xl font-bold text-charm-text mb-3">Contacto</h2>
-  <p class="text-charm-muted mb-10 leading-relaxed max-w-lg">
-    Estoy abierto a colaboraciones, oportunidades o solo un café virtual.
+---
+/**
+ * Contact — a framed shell session; each link is a command line.
+ */
+import Frame from "./Frame.astro";
+import SectionHeader from "./SectionHeader.astro";
+import { getLocale, shell, useTranslations } from "../i18n";
+
+const t = useTranslations(getLocale(Astro.currentLocale));
+
+const links = [
+  { cmd: "mail", label: "whoangel.agl@gmail.com", href: "mailto:whoangel.agl@gmail.com" },
+  { cmd: "gh", label: "github.com/whoAngeel", href: "https://github.com/whoAngeel", external: true },
+  {
+    cmd: "in",
+    label: "linkedin.com/in/angel-jesus-zorrilla-cuevas",
+    href: "https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-269a9b296/",
+    external: true,
+  },
+];
+---
+
+<section id="contacto" class="section">
+  <SectionHeader
+    title={t.sections.contact.title}
+    path={shell.paths.contact}
+    lead={t.sections.contact.lead}
+  />
+
+  <Frame as="div" class="contact-term max-w-2xl px-2 pt-5 pb-3 sm:px-3">
+    <Fragment slot="title"><strong>contacto</strong> ─ zsh</Fragment>
+    <ul>
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="contact-link flex items-center gap-3 min-w-0 px-3 py-3 font-mono text-sm sm:text-base text-charm-text no-underline"
+            {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            <span class="tui-prompt shrink-0">❯</span>
+            <span class="w-10 shrink-0 text-charm-muted-soft">{l.cmd}</span>
+            <span class="contact-label truncate">{l.label}</span>
+            {l.external && <span class="sr-only">{t.a11y.opensNewTab}</span>}
+            <span class="contact-arrow ml-auto shrink-0 text-charm-accent-text" aria-hidden="true">↵</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Frame>
+
+  <p class="mt-16 font-mono text-xs text-charm-muted-soft">
+    © {new Date().getFullYear()} Angel Jesus Zorrilla Cuevas · {t.contact.footer}
   </p>
-
-  <div class="max-w-lg space-y-3">
-    <a href="mailto:whoangel.agl@gmail.com" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
-      <span class="font-mono text-charm-accent shrink-0">$</span>
-      <span class="font-mono text-charm-muted-soft shrink-0">mail</span>
-      <span>whoangel.agl@gmail.com</span>
-    </a>
-
-    <a href="https://github.com/whoAngeel" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
-      <span class="font-mono text-charm-accent shrink-0">$</span>
-      <span class="font-mono text-charm-muted-soft shrink-0">gh</span>
-      <span>github.com/whoAngeel</span>
-    </a>
-
-    <a href="https://www.linkedin.com/in/angel-jesus-zorrilla-cuevas-269a9b296/" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-3 bg-charm-surface border border-charm-border rounded px-5 py-3.5 text-charm-text">
-      <span class="font-mono text-charm-accent shrink-0">$</span>
-      <span class="font-mono text-charm-muted-soft shrink-0">in</span>
-      <span>linkedin.com/in/angel-jesus-zorrilla-cuevas</span>
-    </a>
-  </div>
 </section>
 
-<style is:global>
+<style>
   .contact-link {
-    transition: border-color 0.2s, transform 0.2s;
+    border-radius: 2px;
+    transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
   }
-  .contact-link:hover {
-    border-color: var(--charm-accent);
-    transform: translateX(4px);
+  .contact-link:hover,
+  .contact-link:focus-visible {
+    background: rgba(124, 58, 237, 0.14);
   }
-  .contact-link:hover span:last-child {
-    color: var(--charm-accent-soft);
+  .contact-link:hover .contact-label {
+    color: var(--charm-accent-text);
   }
-  .contact-link span:last-child {
-    transition: color 0.2s;
+  .contact-arrow {
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-out);
+  }
+  .contact-link:hover .contact-arrow,
+  .contact-link:focus-visible .contact-arrow {
+    opacity: 1;
   }
 </style>

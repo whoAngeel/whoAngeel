@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://whoangel.github.io/whoAngeel/sitemap-index.xml
+Sitemap: https://whoangeel.github.io/whoAngeel/sitemap-index.xml

@@ -1,145 +1,184 @@
 ---
+/**
+ * Header — sticky top bar styled as a TUI tab strip.
+ * Navigation uses native anchor links; smooth scrolling and the sticky
+ * offset are handled in CSS (`scroll-behavior` + `scroll-padding-top`).
+ *
+ * Section ids are stable across locales (Spanish slugs), so switching
+ * language keeps the reader at the same section (see script below).
+ */
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, localeMeta, locales, useTranslations } from "../i18n";
 
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const links = [
+  { href: "#experiencia", label: t.nav.experience },
+  { href: "#proyectos", label: t.nav.projects },
+  { href: "#logros", label: t.nav.achievements },
+  { href: "#habilidades", label: t.nav.skills },
+  { href: "#contacto", label: t.nav.contact },
+];
+
+const languages = locales.map((l) => ({
+  locale: l,
+  href: getRelativeLocaleUrl(l),
+  ...localeMeta[l],
+}));
 ---
 
-<header class="sticky top-0 z-50 flex items-center justify-between py-3 px-4 sm:px-8 w-full border-b border-charm-border bg-charm-bg" id="header">
-  <div class="flex items-center gap-4 sm:gap-10 min-w-0">
-    <a href="#" class="brand-link text-charm-text no-underline select-none shrink-0">
-      whoAngeel<span class="cursor">_</span>
+<header
+  id="header"
+  class="sticky top-0 z-50 grid grid-cols-[1fr_auto] lg:flex items-center lg:justify-between gap-x-4 gap-y-2 py-2.5 lg:py-0 lg:h-14 px-4 sm:px-8 w-full border-b border-charm-border bg-charm-bg/95 font-mono"
+>
+  <!-- < lg: brand + language + CV on row 1, nav as a scrollable tab strip on row 2. -->
+  <div class="contents lg:flex items-center gap-8 min-w-0">
+    <a href="#inicio" class="brand-link shrink-0 text-sm font-semibold text-charm-text no-underline select-none">
+      whoAngeel<span class="brand-cursor" aria-hidden="true">_</span>
     </a>
-    <nav class="flex items-center gap-x-4 sm:gap-x-10 overflow-x-auto scrollbar-hide">
-      <a href="#experiencia" class="nav-link shrink-0">Experiencia</a>
-      <a href="#proyectos" class="nav-link shrink-0">Proyectos</a>
-      <a href="#habilidades" class="nav-link shrink-0">Habilidades</a>
-      <a href="#contacto" class="nav-link shrink-0">Contacto</a>
+    <nav aria-label={t.nav.label} class="nav-scroll col-span-2 row-start-2 min-w-0 overflow-x-auto">
+      <ul class="flex items-center gap-x-5 sm:gap-x-7 text-xs sm:text-sm py-1 lg:py-0">
+        {links.map((l) => (
+          <li class="shrink-0">
+            <a href={l.href} class="nav-link text-charm-muted">{l.label}</a>
+          </li>
+        ))}
+      </ul>
     </nav>
   </div>
-  <button class="cta-btn bg-charm-accent text-charm-text font-medium text-xs sm:text-sm px-3 sm:px-4 py-1.5 rounded shrink-0">Descargar CV</button>
+  <div class="col-start-2 row-start-1 flex items-center gap-3 sm:gap-4 shrink-0">
+    <!-- Language switch: `ES | EN`, current locale highlighted. -->
+    <ul class="lang-switch flex flex-nowrap items-center whitespace-nowrap text-xs" aria-label={t.nav.language}>
+      {languages.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            hreflang={l.bcp47}
+            lang={l.locale}
+            title={l.name}
+            class:list={["lang-link", { "is-current": l.locale === locale }]}
+            aria-current={l.locale === locale ? "true" : undefined}
+            data-lang-link
+          >
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <!-- TODO: point to the real CV file once it exists (e.g. public/cv.pdf). -->
+    <button type="button" class="tui-btn tui-btn--primary shrink-0 !py-1 !px-3 text-xs sm:text-sm" aria-label={t.nav.downloadCv}>
+      <span class="sm:hidden" aria-hidden="true">CV</span>
+      <span class="hidden sm:inline" aria-hidden="true">{t.nav.downloadCv}</span>
+    </button>
+  </div>
 </header>
 
-<style is:global>
-  .scrollbar-hide {
-    -ms-overflow-style: none;
+<style>
+  .nav-scroll {
     scrollbar-width: none;
+    /* Fade the right edge so overflow reads as "scrollable" on phones. */
+    mask-image: linear-gradient(to right, #000 85%, transparent);
   }
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-
-
-  .brand-link {
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    transition: color 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  .nav-scroll::-webkit-scrollbar {
+    display: none;
   }
-  .brand-link:hover {
-    color: var(--charm-accent-soft);
+  @media (min-width: 1180px) {
+    .nav-scroll {
+      mask-image: none;
+    }
   }
 
-  .cursor {
-    display: inline-block;
-    margin-left: 1px;
-    color: var(--charm-accent);
-    font-weight: 300;
-    animation: cursor-blink 1s step-end infinite;
+  .nav-link {
+    text-decoration: none;
   }
-
-  @keyframes cursor-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-
+  .nav-link:hover,
   .nav-link.active {
     color: var(--charm-text);
   }
 
-  .cta-btn {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    transition: background 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  .lang-link {
+    display: inline-block;
+    padding: 0.15rem 0.4rem;
+    color: var(--charm-muted);
+    text-decoration: none;
+    border-radius: 2px;
   }
-  .cta-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      120deg,
-      transparent 25%,
-      rgba(255, 255, 255, 0.08) 45%,
-      rgba(255, 255, 255, 0.12) 50%,
-      rgba(255, 255, 255, 0.08) 55%,
-      transparent 75%
-    );
-    translate: -100%;
-    transition: translate 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  .lang-switch li {
+    display: flex;
+    align-items: center;
   }
-  .cta-btn:hover::before {
-    translate: 100%;
+  .lang-switch li + li::before {
+    content: "|";
+    color: var(--charm-border-soft);
+  }
+  .lang-link:hover {
+    color: var(--charm-text);
+  }
+  .lang-link.is-current {
+    color: var(--charm-bg);
+    background: var(--charm-accent-soft);
+    font-weight: 600;
+  }
+
+  .brand-link:hover {
+    color: var(--charm-accent-text);
+  }
+
+  .brand-cursor {
+    margin-left: 1px;
+    color: var(--charm-accent-soft);
+    animation: tui-blink 1.06s step-end infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cursor {
+    .brand-cursor {
       animation: none;
-      opacity: 1;
-    }
-    .cta-btn::before {
-      display: none;
     }
   }
 </style>
 
 <script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+  /** Keep the current section when switching language (ids are shared). */
+  document.querySelectorAll<HTMLAnchorElement>("[data-lang-link]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const active = document.querySelector<HTMLAnchorElement>(".nav-link.active");
+      const hash = location.hash || active?.hash;
+      if (hash) link.hash = hash;
     });
   });
 
-  if (!isReduced) {
-    const links = Array.from(document.querySelectorAll(".nav-link"));
-    const sections = links
-      .map((l) => document.querySelector(l.getAttribute("href")))
-      .filter(Boolean);
+  /** Highlight the nav link of the section currently in view. */
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".nav-link"));
+  const byId = new Map(links.map((l) => [l.hash.slice(1), l]));
 
-    function setActive(href) {
-      links.forEach((l) =>
-        l.classList.toggle("active", l.getAttribute("href") === href),
-      );
-    }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        links.forEach((l) => {
+          const active = l === byId.get(entry.target.id);
+          l.classList.toggle("active", active);
+          if (active) l.setAttribute("aria-current", "true");
+          else l.removeAttribute("aria-current");
+        });
+      }
+    },
+    // A thin band ~30% from the top acts as the "current section" line.
+    { rootMargin: "-30% 0px -69% 0px" },
+  );
 
-    const header = document.getElementById("header");
-    if (header) {
-      ScrollTrigger.create({
-        start: "top -1px",
-        onUpdate: (self) => {
-          header.style.borderColor =
-            self.progress > 0
-              ? "var(--charm-border-soft)"
-              : "var(--charm-border)";
-        },
-      });
-    }
+  byId.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) observer.observe(section);
+  });
 
-    sections.forEach((section, i) => {
-      if (!section) return;
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 30%",
-        end: "bottom 30%",
-        onEnter: () => setActive(links[i]?.getAttribute("href")),
-        onEnterBack: () => setActive(links[i]?.getAttribute("href")),
-      });
-    });
+  const header = document.getElementById("header");
+  if (header) {
+    const onScroll = () => {
+      header.style.borderBottomColor = window.scrollY > 0 ? "var(--charm-border-soft)" : "";
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
   }
 </script>

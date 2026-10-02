@@ -1,0 +1,117 @@
+---
+/**
+ * Achievements ("Logros") — hackathon awards and certificates.
+ * Data lives in src/data/achievements.ts; see that file for how to attach
+ * certificate images or verification links.
+ *
+ * Placed right after Projects: each award links back to the project card
+ * that won it, so the two sections read as one story.
+ */
+import Frame from "./Frame.astro";
+import SectionHeader from "./SectionHeader.astro";
+import { achievements } from "../data/achievements";
+import { getLocale, localize, shell, useTranslations } from "../i18n";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pad = (n: number) => String(n).padStart(2, "0");
+const wins = achievements.filter((a) => a.kind === "1er-lugar" || a.kind === "ganador").length;
+const highlights = achievements.filter((a) => a.kind === "finalista").length;
+---
+
+<section id="logros" class="section">
+  <SectionHeader
+    title={t.sections.achievements.title}
+    path={shell.paths.achievements}
+    meta={t.sections.items(pad(achievements.length))}
+    lead={t.sections.achievements.lead}
+  />
+
+  <!-- Summary line, like a CLI tool's footer stats. -->
+  <p class="achievements-summary max-w-none font-mono text-xs sm:text-sm text-charm-muted mb-8">
+    <span class="text-charm-text tabular-nums">{wins}</span> {t.achievements.prizes(wins)}
+    {highlights > 0 && (
+      <> · <span class="text-charm-text tabular-nums">{highlights}</span> {t.achievements.tops(highlights)}</>
+    )}
+    · {t.achievements.scope}
+  </p>
+
+  <ol class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8" role="list">
+    {achievements.map((a, i) => (
+      <li class="achievement-item">
+        <Frame as="article" class="achievement-card h-full flex flex-col" aria-labelledby={`logro-${a.id}`}>
+          <Fragment slot="title">cert_{pad(i + 1)}{a.date && <> ─ {a.date}</>}</Fragment>
+
+          {a.certificate && (
+            <a
+              href={base + a.certificate}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="achievement-media"
+              aria-label={t.achievements.viewCertificate(a.title)}
+            >
+              <img src={base + a.certificate} alt="" loading="lazy" decoding="async" />
+            </a>
+          )}
+
+          <div class="flex flex-1 flex-col gap-3 px-5 pt-5 pb-5">
+            <div class="flex items-center justify-between gap-3">
+              <span class:list={["tui-badge", { "tui-badge--muted": a.kind === "finalista" }]}>
+                {a.kind === "finalista" ? "◆" : "★"} {t.achievements.kind[a.kind]}
+              </span>
+              <span class="font-mono text-xs text-charm-muted-soft truncate">{a.issuer}</span>
+            </div>
+
+            <h3 id={`logro-${a.id}`} class="font-mono text-lg sm:text-xl font-semibold text-charm-text leading-snug">
+              {a.title}
+            </h3>
+
+            <p class="text-sm text-charm-muted leading-relaxed">{localize(a.summary, locale)}</p>
+
+            {(a.projectId || a.credentialUrl) && (
+              <div class="mt-auto pt-3 flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm">
+                {a.projectId && <a href={`#proyecto-${a.projectId}`} class="no-underline">{t.achievements.seeProject}</a>}
+                {a.credentialUrl && (
+                  <a href={a.credentialUrl} target="_blank" rel="noopener noreferrer" class="no-underline">
+                    {t.achievements.credential} ↗<span class="sr-only"> {t.a11y.opensNewTab}</span>
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </Frame>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .achievement-card {
+    transition: border-color 0.2s var(--ease-out);
+  }
+  .achievement-card:hover,
+  .achievement-card:focus-within {
+    border-color: var(--charm-accent-soft);
+  }
+
+  .achievement-media {
+    display: block;
+    aspect-ratio: 4 / 3;
+    margin: 0.5rem 0.5rem 0;
+    overflow: hidden;
+    background: var(--charm-surface-strong);
+    border: 1px solid var(--charm-border);
+    border-radius: 3px;
+  }
+  .achievement-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .achievement-media:hover img {
+    transform: scale(1.03);
+  }
+</style>

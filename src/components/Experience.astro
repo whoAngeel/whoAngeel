@@ -1,131 +1,93 @@
 ---
-import Tag from './Tag.astro';
+/**
+ * Experience — vertical timeline. Each role is an `.exp-item`; each project
+ * inside a role is an `.exp-project` rendered like a tree node (├─).
+ * Content: src/data/experience.ts.
+ */
+import Tag from "./Tag.astro";
+import SectionHeader from "./SectionHeader.astro";
+import { experience } from "../data/experience";
+import { getLocale, localize, shell, useTranslations } from "../i18n";
+
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
 ---
 
-<section id="experiencia" class="max-w-5xl mx-auto w-full px-8 py-24">
-  <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Experiencia</h2>
+<section id="experiencia" class="section">
+  <SectionHeader title={t.sections.experience.title} path={shell.paths.experience} />
 
-  <div class="max-w-2xl">
-  <div class="border-l-2 border-charm-border pl-6 space-y-12">
-    <!-- DESACTIVADO
-    <article class="exp-item">
-      <time class="text-sm text-charm-accent font-medium tracking-wide">Nov 2025 — Presente</time>
-      <h3 class="text-2xl font-semibold text-charm-text mt-1">Desarrollador Full Stack</h3>
-      <p class="text-charm-muted-soft text-sm mt-1">
-        Startup 
-      </p>
+  <div class="max-w-3xl">
+    <div class="exp-timeline border-l border-charm-border-soft pl-6 sm:pl-8 space-y-12">
+      {experience.map((role) => (
+        <article class="exp-item" aria-labelledby={`exp-${role.id}`}>
+          <p class="font-mono text-xs sm:text-sm text-charm-accent-text tracking-wide">{localize(role.period, locale)}</p>
+          <h3 id={`exp-${role.id}`} class="font-mono text-xl sm:text-2xl font-semibold text-charm-text mt-1">
+            {localize(role.title, locale)}
+          </h3>
+          <p class="font-mono text-charm-muted-soft text-xs sm:text-sm mt-1">{localize(role.org, locale)}</p>
 
-      <div class="text-charm-muted mt-4 leading-relaxed max-w-prose space-y-4">
-        <div>
-          <p>
-            Desarrollo de agentes con n8n para automatización de procesos y
-            processing de documentación KYC/KYB. Integración de flujos
-            headless con Directus sobre PostgreSQL. Plataforma interna en
-            React + TypeScript.
-          </p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <Tag label="React" />
-            <Tag label="TypeScript" />
-            <Tag label="n8n" />
-            <Tag label="Directus" />
-            <Tag label="PostgreSQL" />
-            <Tag label="Git" />
-            
+          <div class="text-charm-muted mt-6 leading-relaxed space-y-6">
+            {role.projects.map((project) => (
+              <div class="exp-project">
+                <p>
+                  <strong class="exp-project-title">{localize(project.title, locale)}</strong>
+                  {localize(project.detail, locale)}
+                </p>
+                <ul class="flex flex-wrap gap-1.5 mt-3" aria-label={t.a11y.stack}>
+                  {project.stack.map((label) => <Tag label={label} />)}
+                </ul>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-    </article>
-    -->
-
-    <article class="exp-item">
-      <time class="text-sm text-charm-accent font-medium tracking-wide">Ago 2024 — Mar 2026</time>
-      <h3 class="text-2xl font-semibold text-charm-text mt-1">Desarrollador Full Stack</h3>
-      <p class="text-charm-muted-soft text-sm mt-1">
-        SWEETTECH · Asignado a proyectos vía INSAITE
-      </p>
-
-      <div class="text-charm-muted mt-4 leading-relaxed max-w-prose space-y-5">
-        <div>
-          <p>
-            <strong class="text-charm-text">Validocu — TRAXION:</strong>
-            Sistema de validación documental con IA multimodal (LLM).
-            En la primera versión implementé el backend con Cloud Functions.
-            Al cliente le gustó tanto que quisieron implementarlo en varias
-            áreas del corporativo, lo que llevó a Validocu 2.0: un backend
-            multitenant con microservicios desplegados en GKE, integrando
-            PubSub para encolamiento de documentos (evitando errores de cuota).
-            Validocu tuvo una mejora de x15 en validaciones por documento por validador respecto al proceso manual.
-          </p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <Tag label="Python" />
-            <Tag label="FastAPI"/>
-            <Tag label="Cloud Functions" />
-            <Tag label="GKE" />
-            <Tag label="PubSub" />
-            <Tag label="Vertex AI" />
-            <Tag label="Docker" />
-            <Tag label="Cloud Storage" />
-            <Tag label="Firestore" />
-            <Tag label="Secret Manager" />
-            <Tag label="Cloud Scheduler" />
-          </div>
-        </div>
-
-        <div>
-          <p>
-            <strong class="text-charm-text">Confrontas UI — FERROMEX:</strong>
-            Desarrollo del ecosistema frontend en Flutter Web para la gestión operativa de confrontas, estructurado bajo Clean Architecture y modularización por features para garantizar escalabilidad. Con el fin de optimizar el ciclo DevOps, diseñé una CLI personalizada que automatiza el versionamiento y la entrega continua de la aplicación.
-          </p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <Tag label="Flutter" />
-            <Tag label="Clean Architecture" />
-            <Tag label="Go" />
-            <Tag label="DevOps" />
-            <Tag label="Docker" />
-          </div>
-        </div>
-
-        <div>
-          <p>
-            <strong class="text-charm-text">Sistema de Evidencias de PODs — TRAXION:</strong>
-            Desarrollo del ecosistema backend en Python para el registro, procesamiento y seguimiento 
-            automatizado de evidencias operativas provenientes de dispositivos móviles. 
-            La solución fue implementada bajo una arquitectura serverless utilizando Google Cloud Platform.
-            Para garantizar la escalabilidad y resiliencia del sistema, gestionando el despliegue mediante gcloud-cli.
-          </p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <Tag label="Python" />
-            <Tag label="Cloud Functions" />
-            <Tag label="Firestore" />
-            <Tag label="Cloud Storage" />
-            <Tag label="gcloud-cli" />
-            <Tag label="Go" />
-          </div>
-        </div>
-
-        <div>
-          <p>
-            <strong class="text-charm-text">ProShooter — Proyecto de Residencia Profesional:</strong>
-            Diseño e implementación de la arquitectura backend completa para una 
-            plataforma de seguimiento de sesiones de entrenamiento táctico de tiro. 
-            El proyecto destacó por el modelado y estructuración de una base de datos relacional 
-            de alta complejidad con más de 16 tablas, además de la integración, entrenamiento y 
-            despliegue de un modelo de CV con YOLOv8 para
-            la detección y conteo de impactos en blancos.
-          </p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <Tag label="FastAPI" />
-            <Tag label="PostgreSQL" />
-            <Tag label="YOLO" />
-            <Tag label="Python" />
-            <Tag label="Docker" />
-            <Tag label="AWS" />
-          </div>
-        </div>
-      </div>
-
-    </article>
-
-  </div>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .exp-item {
+    position: relative;
+  }
+
+  /* Timeline node: a square "cell" instead of a round dot, TUI style. */
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    top: 0.3em;
+    left: calc(-1.5rem - 5px);
+    width: 9px;
+    height: 9px;
+    background: var(--charm-accent-soft);
+    outline: 3px solid var(--charm-bg);
+  }
+  @media (min-width: 640px) {
+    .exp-item::before {
+      left: calc(-2rem - 5px);
+    }
+  }
+
+  .exp-project {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .exp-project::before {
+    content: '├─';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    color: var(--charm-border-soft);
+  }
+  .exp-project:last-child::before {
+    content: '└─';
+  }
+
+  .exp-project-title {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--charm-text);
+  }
+</style>

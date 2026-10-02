@@ -1,4 +1,5 @@
 ---
+/** Tech chip used in the Experience section. Styling: `.tui-chip` (global.css). */
 interface Props {
   label: string;
 }
@@ -6,6 +7,4 @@ interface Props {
 const { label } = Astro.props;
 ---
 
-<span class="bg-charm-surface border border-charm-border px-2 py-0.5 text-xs text-charm-muted rounded">
-  {label}
-</span>
+<li class="tui-chip">{label}</li>

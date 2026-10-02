@@ -12,7 +12,8 @@ colors:
   border-soft: "#34343c"
   text: "#e6e9ef"
   muted: "#94a3b8"
-  muted-soft: "#6b7280"
+  muted-soft: "#7d8594"
+  accent-text: "#a78bfa"
   success: "#22c55e"
   warning: "#f59e0b"
   danger: "#ef4444"
@@ -84,7 +85,8 @@ La paleta es deep dark con un solo acento cromático: el púrpura, usado con pre
 - **Borde Suave** (#34343c): Bordes secundarios, separaciones sutiles.
 - **Texto** (#e6e9ef): Blanco ligeramente cálido para cuerpo.
 - **Texto Apagado** (#94a3b8): Metadatos, descripciones secundarias.
-- **Texto Apagado Suave** (#6b7280): Placeholders, lowest priority information.
+- **Texto Apagado Suave** (#7d8594): Metadatos de baja prioridad. Subido desde #6b7280 (4.1:1) para cumplir AA (≈5.3:1).
+- **Púrpura Texto** (#a78bfa): Única variante del acento permitida para TEXTO (≈6.9:1). #7c3aed solo para rellenos/bordes (≈3.5:1, no pasa AA en texto).
 
 ### Semantic
 - **Success** (#22c55e), **Warning** (#f59e0b), **Danger** (#ef4444), **Info** (#38bdf8): Solo en contextos funcionales.
@@ -112,6 +114,8 @@ La escala sigue una proporción 1.25 (major third), con tamaños fluidos para he
 - **Caption** (400, 0.75rem / 12px, 1.4): Notas al pie, información de baja prioridad.
 
 ### Named Rules
+**La Regla Mono/Sans.** JetBrains Mono para todo lo que "es terminal": títulos, prompts, metadatos, chips, botones, navegación. Onest solo para prosa larga (descripciones, bio) por legibilidad.
+
 **La Regla de la Precisión Geométrica.** Onest es una sola familia con rango completo de pesos. No se necesitan fuentes satélite. La personalidad viene del peso y espaciado, no de cambiar de tipo. 1.25 de ratio constante entre niveles.
 
 ## 4. Elevation
@@ -138,6 +142,15 @@ La única excepción es el shadow de Tailwind en el header, que puede reemplazar
 
 ### Selection
 - **Background:** purple semi-transparent (rgba(124, 58, 237, 0.35)).
+
+### TUI Frame (Lipgloss)
+- Borde 1px `border-soft`, radio 6px, fondo `surface`.
+- Título opcional sobre el borde superior (mono, caption), con fondo `bg` que "corta" la línea.
+- Hover/focus-within: borde `accent-soft`.
+
+### Cursor de cuadrícula
+- Celdas de `--cell-w × --cell-h` (10×20px), las mismas variables que dibujan la cuadrícula de fondo.
+- La cuadrícula usa `background-attachment: fixed` para compartir coordenadas con el canvas del cursor.
 
 ### CRT Background Overlay
 - **Comportamiento:** Fijo (position: fixed), z-index 1000, pointer-events: none.

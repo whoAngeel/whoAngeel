@@ -1,0 +1,35 @@
+---
+/**
+ * SectionHeader — shared heading for every anchored section.
+ *
+ *   ❯ cd ~/proyectos                     07 items
+ *   Proyectos
+ *   ────────────────────────────────────────────
+ *
+ * The `cd` line mirrors the anchor id, reinforcing the "navigating a
+ * filesystem" metaphor without hiding the human-readable title.
+ */
+interface Props {
+  title: string;
+  /** Anchor/path segment shown in the prompt line. */
+  path: string;
+  /** Optional right-aligned meta (e.g. item count). */
+  meta?: string;
+  /** Optional one-line description under the title. */
+  lead?: string;
+}
+
+const { title, path, meta, lead } = Astro.props;
+---
+
+<header class="section-header mb-10 sm:mb-12">
+  <div class="flex items-baseline justify-between gap-4 font-mono text-xs sm:text-sm text-charm-muted-soft">
+    <p><span class="tui-prompt">❯</span> cd ~/{path}</p>
+    {meta && <p class="shrink-0 tabular-nums">{meta}</p>}
+  </div>
+  <h2 class="section-title mt-2 font-mono text-3xl sm:text-4xl font-bold tracking-tight text-charm-text">
+    {title}
+  </h2>
+  <div class="section-rule mt-4 h-px bg-charm-border-soft" aria-hidden="true"></div>
+  {lead && <p class="mt-4 text-charm-muted leading-relaxed">{lead}</p>}
+</header>

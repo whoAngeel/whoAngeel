@@ -1,64 +1,77 @@
 ---
+/**
+ * Skills — one Lipgloss frame per category; tags stagger in on scroll.
+ */
+import Frame from "./Frame.astro";
+import SectionHeader from "./SectionHeader.astro";
+import { getLocale, shell, useTranslations } from "../i18n";
+
+const t = useTranslations(getLocale(Astro.currentLocale));
+
 const categories = [
   {
-    name: "Backend",
+    name: t.skills.backend,
     items: ["Python", "Go", "Node.js", "NestJS", "FastAPI", "Express.js", "PostgreSQL", "MongoDB", "Redis"]
   },
   {
-    name: "Cloud & DevOps",
-    items: ["GCP", "Cloud Functions", "PubSub", "Firestore", "Vertex AI", "Docker", "Cloud Run", "aws lambda", "GitHub Actions",  "Cloud Storage",]
+    name: t.skills.cloud,
+    items: ["GCP", "Cloud Functions", "PubSub", "Firestore", "Vertex AI", "Docker", "DigitalOcean", "Cloud Run", "AWS Lambda", "GitHub Actions", "Cloud Storage"]
   },
   {
-    name: "Frontend",
-    items: ["Astro", "React", "TypeScript", "Tailwind", "Flutter", "Vue.js"]
+    name: t.skills.frontend,
+    items: ["Astro", "React", "Next.js", "TypeScript", "Tailwind", "Flutter", "Vue.js"]
   },
   {
-    name: "AI & ML",
+    name: t.skills.ai,
     items: ["LLM Multimodal", "YOLO", "n8n", "Qdrant", "LangChain"]
   },
   {
-    name: "Herramientas",
+    name: t.skills.tools,
     items: ["Git", "Linux", "Charm CLI", "Go TUI", "gcloud CLI"]
   }
 ];
 ---
 
-<section id="habilidades" class="max-w-5xl mx-auto w-full px-8 py-24">
-  <h2 class="section-title text-4xl font-bold text-charm-text mb-12">Habilidades</h2>
+<section id="habilidades" class="section">
+  <SectionHeader title={t.sections.skills.title} path={shell.paths.skills} />
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
     {
       categories.map((cat, i) => (
-        <div class:list={["skill-cat", { "md:col-span-2": i === categories.length - 1 }]}>
-          <h3 class="flex items-center gap-2 text-charm-text font-semibold text-sm mb-4 tracking-wide">
-            <span class="font-mono text-charm-accent font-normal tabular-nums">0{i + 1}</span>
-            <span>{cat.name}</span>
-            <span class="flex-1 h-px bg-charm-border/40"></span>
-          </h3>
-          <div class="flex flex-wrap gap-2">
+        <Frame
+          as="div"
+          class:list={["skill-cat px-5 pt-6 pb-5", { "md:col-span-2": i === categories.length - 1 }]}
+        >
+          <Fragment slot="title">
+            <span class="text-charm-accent-text tabular-nums">0{i + 1}</span> ─ <strong>{cat.name}</strong>
+          </Fragment>
+          <h3 class="sr-only">{cat.name}</h3>
+          <ul class="flex flex-wrap gap-2">
             {cat.items.map((item) => (
-              <span class="skill-tag bg-charm-surface border border-charm-border/50 px-3 py-1.5 text-sm text-charm-muted rounded hover:scale-105 hover:-translate-y-0.5 transition-[color,background,border-color] duration-200 cursor-default">
-                {item}
-              </span>
+              <li class="skill-tag">{item}</li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </Frame>
       ))
     }
   </div>
 </section>
 
-<style is:global>
+<style>
   .skill-tag {
-    will-change: transform, opacity;
+    padding: 0.25rem 0.625rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    color: var(--charm-muted);
+    background: var(--charm-surface-strong);
+    border: 1px solid var(--charm-border);
+    border-radius: 2px;
+    transition: color 0.2s var(--ease-out), border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
   }
   .skill-tag:hover {
-    background: rgba(124, 58, 237, 0.12);
-    border-color: rgba(124, 58, 237, 0.5);
-    color: var(--charm-accent-soft);
-  }
-  .skill-cat {
-    will-change: transform, opacity;
+    color: var(--charm-text);
+    background: rgba(124, 58, 237, 0.14);
+    border-color: rgba(157, 121, 243, 0.6);
   }
 </style>
 
@@ -69,7 +82,7 @@ const categories = [
   gsap.registerPlugin(ScrollTrigger);
 
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    gsap.utils.toArray(".skill-cat").forEach((cat) => {
+    gsap.utils.toArray<HTMLElement>(".skill-cat").forEach((cat) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cat,

@@ -2,28 +2,43 @@
 import BaseAstro from "../components/BaseAstro.astro";
 import Header from "../components/Header.astro";
 import "../styles/global.css";
+import { getLocale, useTranslations } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zorrilla Cuevas" } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const { title = t.meta.title, description = t.meta.description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
     <head>
         <BaseAstro title={title} description={description}/>
+        <!--
+          Runs before first paint: flags JS support and restores the saved
+          Projects view so the correct view renders without a flash.
+        -->
+        <script is:inline>
+          document.documentElement.classList.add("js");
+          try {
+            var view = localStorage.getItem("projects-view");
+            if (view === "grid" || view === "swap") document.documentElement.dataset.projectsView = view;
+          } catch (e) {}
+        </script>
     </head>
     <body>
-        <div id="loader">
+        <a href="#main" class="skip-link">{t.a11y.skipLink}</a>
+        <div id="loader" aria-hidden="true">
             <div class="loader-content">
                 <div class="loader-pct" id="loader-pct">0%</div>
                 <div id="loader-bar-track">
                     <div id="loader-bar"></div>
                 </div>
-                <div class="loader-label">cargando</div>
+                <div class="loader-label">{t.loader}</div>
             </div>
         </div>
         <canvas id="grid-paint" aria-hidden="true"></canvas>
@@ -31,31 +46,60 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
         <slot />
     </body>
     <script>
+        /**
+         * Boot loader. Progress is time-based (not frame-count based) so it
+         * always finishes in ~LOADER_MS even when rAF is throttled, e.g. in a
+         * background tab. It never blocks content longer than that.
+         */
         (() => {
+            const LOADER_MS = 700;
             const bar = document.getElementById("loader-bar");
             const pct = document.getElementById("loader-pct");
             const wrap = document.getElementById("loader");
-            if (!bar || !wrap) return;
-            let w = 0;
-            const step = () => {
-                w += Math.random() * 6 + 1.5;
-                if (w >= 100) { w = 100; bar.style.width = "100%"; pct.textContent = "100%"; }
-                bar.style.width = w + "%";
-                pct.textContent = Math.round(w) + "%";
-                if (w < 100) requestAnimationFrame(step);
-                else {
-                    setTimeout(() => {
-                        wrap.classList.add("loader-hidden");
-                        setTimeout(() => wrap.remove(), 500);
-                    }, 400);
-                }
+            if (!bar || !pct || !wrap) return;
+
+            const t0 = performance.now();
+            const done = () => {
+                wrap.classList.add("loader-hidden");
+                setTimeout(() => wrap.remove(), 450);
+            };
+            const step = (now: number) => {
+                const p = Math.min(1, (now - t0) / LOADER_MS);
+                // ease-out so it feels like it "settles" at 100%
+                const v = Math.round((1 - Math.pow(1 - p, 3)) * 100);
+                bar.style.width = v + "%";
+                pct.textContent = v + "%";
+                if (p < 1) requestAnimationFrame(step);
+                else setTimeout(done, 150);
             };
             requestAnimationFrame(step);
+            // Safety net if rAF is paused entirely.
+            setTimeout(done, LOADER_MS + 1200);
         })();
     </script>
 <style>
-  body {
+  /* Added by the cursor script, so the native pointer is never lost without JS. */
+  :global(body.grid-cursor) {
     cursor: none;
+  }
+  :global(body.grid-cursor.native-cursor) {
+    cursor: auto;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 10000;
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    color: var(--charm-bg);
+    background: var(--charm-accent-soft);
+    translate: 0 -200%;
+  }
+  .skip-link:focus {
+    translate: 0 0;
   }
 
   #grid-paint {
@@ -84,8 +128,8 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     inset: 0;
     z-index: -1;
     background:
-      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px) 0 0 / 10px 20px,
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px) 0 0 / 10px 20px;
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 0 0 / var(--cell-w) var(--cell-h),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) 0 0 / var(--cell-w) var(--cell-h);
   }
 
   .loader-content {
@@ -96,17 +140,11 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
     gap: 0.5rem;
   }
 
-  .loader-label {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 0.85rem;
-    color: var(--charm-muted);
-  }
-
   .loader-pct {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 2rem;
     font-weight: 700;
-    color: var(--charm-accent);
+    color: var(--charm-accent-text);
     line-height: 1;
     margin-bottom: 0.25rem;
   }
@@ -122,16 +160,13 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
   #loader-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, var(--charm-accent), var(--charm-accent-soft));
+    background: var(--charm-accent-soft);
     border-radius: 0;
-    box-shadow:
-      0 0 6px var(--charm-accent),
-      0 0 14px var(--charm-accent);
     transition: width 0.12s ease-out;
   }
 
   .loader-label {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--charm-muted);
     letter-spacing: 0.1em;
@@ -150,9 +185,6 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
   }
 
   @media (hover: none) {
-    body {
-      cursor: auto;
-    }
     #grid-paint {
       display: none;
     }
@@ -160,133 +192,160 @@ const { title = "whoAngeel", description = "Personal Portfolio de Angel Jesus Zo
 </style>
 
 <script>
+  /**
+   * Terminal "block cursor" trail.
+   *
+   * Replaces the mouse pointer with cells painted on the page grid. Cell size
+   * is read from the same CSS variables that draw the background grid
+   * (--cell-w / --cell-h) and the grid uses `background-attachment: fixed`,
+   * so viewport coordinates map 1:1 onto grid cells — no drift on scroll and
+   * no mismatch between cell size and grid size.
+   *
+   * Disabled on touch devices and for prefers-reduced-motion.
+   */
   (() => {
     if (window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const canvas = document.getElementById("grid-paint");
-    if (!canvas) return;
+    const canvas = document.getElementById("grid-paint") as HTMLCanvasElement | null;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
 
-    const ctx = canvas.getContext("2d");
-    const PX = 16;
+    const rootStyle = getComputedStyle(document.documentElement);
+    const CW = parseFloat(rootStyle.getPropertyValue("--cell-w")) || 10;
+    const CH = parseFloat(rootStyle.getPropertyValue("--cell-h")) || 20;
     const FADE = 800;
+    const IDLE_MS = 1500;
+    const BLINK_MS = 530;
+    const COLOR = "157,121,243"; // --charm-accent-soft
+    const INTERACTIVE =
+      "a, button, input, textarea, select, summary, label, [role=button], [tabindex]:not([tabindex='-1'])";
 
-    let w, h;
+    let w = 0;
+    let h = 0;
+    const cells = new Map<string, number>();
+    let lastX: number | undefined;
+    let lastY: number | undefined;
+    let lastCellKey: string | undefined;
+    let raf = 0;
+    let idleTimer: number | undefined;
+    let blinkTimer: number | undefined;
+    let isIdle = false;
+    let blinkOn = true;
+    let overInteractive = false;
 
+    /** Size the canvas in device pixels so 1px cell insets stay crisp. */
     function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas!.width = Math.round(w * dpr);
+      canvas!.height = Math.round(h * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    const cells = new Map();
-    let lastX, lastY;
-
-    function paintAt(mx, my) {
-      const c = Math.floor(mx / PX);
-      const r = Math.floor(my / PX);
-      if (c < 0 || r < 0 || c * PX > w || r * PX > h) return;
-      const key = c + ":" + r;
+    function paintAt(x: number, y: number) {
+      if (x < 0 || y < 0 || x > w || y > h) return;
+      const key = Math.floor(x / CW) + ":" + Math.floor(y / CH);
       cells.set(key, performance.now());
       lastCellKey = key;
     }
 
-    function onMove(e) {
-      const mx = e.clientX;
-      const my = e.clientY;
-      if (lastX !== undefined) {
-        const dx = mx - lastX;
-        const dy = my - lastY;
-        const n = Math.max(Math.abs(dx), Math.abs(dy));
-        for (let t = 0; t <= n; t++) {
-          paintAt(lastX + (dx * t) / n, lastY + (dy * t) / n);
-        }
+    /** Interpolate between samples so fast moves leave a continuous trail. */
+    function onMove(x: number, y: number) {
+      if (lastX !== undefined && lastY !== undefined) {
+        const dx = x - lastX;
+        const dy = y - lastY;
+        const steps = Math.ceil(Math.max(Math.abs(dx) / CW, Math.abs(dy) / CH) * 2) || 1;
+        for (let t = 1; t <= steps; t++) paintAt(lastX + (dx * t) / steps, lastY + (dy * t) / steps);
       } else {
-        paintAt(mx, my);
+        paintAt(x, y);
       }
-      lastX = mx;
-      lastY = my;
-    }
-
-    let raf;
-    let idleTimer;
-    let isIdle = false;
-    let blinkOn = true;
-    let blinkRaf;
-    let lastCellKey;
-    let overInteractive = false;
-    const IDLE_MS = 1500;
-
-    function isInteractive(el) {
-      if (!el) return false;
-      const tag = el.tagName.toLowerCase();
-      if (["button", "a", "input", "textarea", "select"].includes(tag)) return true;
-      if (el.closest("[role=button], .contact-link, .carousel-zone, .cta-btn, .nav-link, .project-card, .skill-tag, .project-badge, .tags-overlay, button")) return true;
-      return false;
+      lastX = x;
+      lastY = y;
     }
 
     function tick() {
-      if (overInteractive) { raf = null; return; }
+      raf = 0;
+      if (overInteractive) return;
       const now = performance.now();
-      ctx.clearRect(0, 0, w, h);
+      ctx!.clearRect(0, 0, w, h);
 
       for (const [key, t0] of cells) {
+        const isCursor = isIdle && key === lastCellKey;
         const age = now - t0;
-        if (age > FADE) {
-          if (isIdle && key === lastCellKey) { cells.set(key, now); continue; }
-          cells.delete(key); continue;
+        if (age > FADE && !isCursor) {
+          cells.delete(key);
+          continue;
         }
-        let a;
-        if (isIdle && key === lastCellKey) {
-          a = blinkOn ? "1" : "0";
-        } else {
-          a = (1 - age / FADE).toFixed(3);
-        }
-        ctx.fillStyle = "rgba(157,121,243," + a + ")";
+        const alpha = isCursor ? (blinkOn ? 1 : 0) : 1 - age / FADE;
+        if (alpha <= 0) continue;
         const [c, r] = key.split(":").map(Number);
-        ctx.fillRect(c * PX, r * PX, PX, PX);
+        ctx!.fillStyle = `rgba(${COLOR},${alpha.toFixed(3)})`;
+        // Inset by the 1px grid line so the cell sits *inside* the grid.
+        ctx!.fillRect(c * CW + 1, r * CH + 1, CW - 1, CH - 1);
       }
 
       if (cells.size > 0) raf = requestAnimationFrame(tick);
-      else raf = null;
     }
 
-    function start() { if (!raf && !overInteractive) raf = requestAnimationFrame(tick); }
+    function start() {
+      if (!raf && !overInteractive) raf = requestAnimationFrame(tick);
+    }
 
-    function resetIdle() {
-      clearTimeout(idleTimer);
-      clearInterval(blinkRaf);
+    function stopIdle() {
+      window.clearTimeout(idleTimer);
+      window.clearInterval(blinkTimer);
       isIdle = false;
       blinkOn = true;
-      idleTimer = setTimeout(() => {
-        if (overInteractive) return;
-        if (cells.size === 0 && lastCellKey) cells.set(lastCellKey, performance.now());
+    }
+
+    function scheduleIdle() {
+      stopIdle();
+      idleTimer = window.setTimeout(() => {
+        if (overInteractive || !lastCellKey) return;
+        cells.set(lastCellKey, performance.now());
         isIdle = true;
-        if (!raf) raf = requestAnimationFrame(tick);
-        blinkRaf = setInterval(() => { blinkOn = !blinkOn; }, 530);
+        start();
+        blinkTimer = window.setInterval(() => {
+          blinkOn = !blinkOn;
+        }, BLINK_MS);
       }, IDLE_MS);
     }
 
-    function onDocMove(e) {
-      const target = e.target;
-      overInteractive = isInteractive(target);
-      if (overInteractive) {
-        document.body.style.cursor = "auto";
-        ctx.clearRect(0, 0, w, h);
-        if (raf) { cancelAnimationFrame(raf); raf = null; }
-        clearTimeout(idleTimer);
-        clearInterval(blinkRaf);
-        isIdle = false;
-        return;
-      }
-      document.body.style.cursor = "none";
-      onMove(e);
-      start();
-      resetIdle();
+    function clearAll() {
+      cells.clear();
+      ctx!.clearRect(0, 0, w, h);
+      cancelAnimationFrame(raf);
+      raf = 0;
+      stopIdle();
     }
 
-    document.addEventListener("mousemove", onDocMove);
-    document.addEventListener("mouseleave", () => { lastX = lastY = undefined; clearTimeout(idleTimer); clearInterval(blinkRaf); isIdle = false; });
+    document.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      const target = e.target as Element | null;
+      overInteractive = !!target?.closest?.(INTERACTIVE);
+      document.body.classList.toggle("native-cursor", overInteractive);
+      if (overInteractive) {
+        clearAll();
+        lastX = lastY = undefined;
+        return;
+      }
+      onMove(e.clientX, e.clientY);
+      start();
+      scheduleIdle();
+    }, { passive: true });
+
+    document.documentElement.addEventListener("mouseleave", () => {
+      lastX = lastY = undefined;
+      clearAll();
+    });
+
+    // Scrolling moves content under a fixed grid; drop the stale idle cursor.
+    window.addEventListener("scroll", () => { if (isIdle) clearAll(); }, { passive: true });
     window.addEventListener("resize", resize);
     resize();
+    document.body.classList.add("grid-cursor");
   })();
 </script>
 </html>

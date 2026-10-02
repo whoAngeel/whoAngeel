@@ -1,0 +1,33 @@
+---
+/**
+ * Frame — Lipgloss-style bordered box with an optional title on its top edge.
+ *
+ *   ╭─ title ──────────╮
+ *   │ slot             │
+ *   ╰──────────────────╯
+ *
+ * Renders as any element via `as` so semantics stay correct
+ * (e.g. `as="article"` for cards, `as="section"` for regions).
+ */
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+  as?: HTMLTag;
+  /** Plain text title. Use the `title` slot for rich content. */
+  title?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = "div", title, class: className, ...rest } = Astro.props;
+const hasTitleSlot = Astro.slots.has("title");
+---
+
+<Tag class:list={["tui-frame", className]} {...rest}>
+  {(title || hasTitleSlot) && (
+    <span class="tui-frame-title">
+      {hasTitleSlot ? <slot name="title" /> : title}
+    </span>
+  )}
+  <slot />
+</Tag>
